@@ -8,6 +8,7 @@ class Spark:
         # url and the parameters
         self.url = "https://api.ciscospark.com/v1"
         self.access_token = "Bearer " + access_token
+        
         return None
     
     # send message to a specific party
@@ -23,6 +24,15 @@ class Spark:
         print(response.text)
         return None
     
-    
-    
+    def getMessageDetails(self, message_id):
+        api_call = "/messages"
+        url = self.url + api_call + "/" + message_id
+        print(url)
+        headers = {
+            "Content-Type": "application/json",
+            "authorization": self.access_token
+        }
+        response = requests.get(url, headers=headers)
+        print(response.text)
+        return None
     
