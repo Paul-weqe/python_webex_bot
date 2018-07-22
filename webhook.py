@@ -11,9 +11,9 @@ def index():
 @app.route("/messages", methods=["POST"])
 def messages():
     data = request.get_json()
-    print(data)
+    message_id = data['data']['id']
     return "Message"
-    
+
 
 if __name__ == "__main__":
     app.run(debug=True)

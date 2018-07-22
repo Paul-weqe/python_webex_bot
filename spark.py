@@ -9,6 +9,14 @@ class Spark:
         self.url = "https://api.ciscospark.com/v1"
         self.access_token = "Bearer " + access_token
         
+        
+        # this dictionary holds what will be heard to the corresponding function that the user will keep
+        # for example, if you hear 'hi', and the corresponding function to handle this message is hi_function()
+        # this will be stored as { 'hi': hi_function }
+        self.hears_to_function = {
+            
+        }
+        
         return None
     
     # send message to a specific party
@@ -19,7 +27,6 @@ class Spark:
             "Content-Type": "application/json",
             "authorization": self.access_token
         }
-        json = message
         response = requests.post(url, json={"roomId":room_id, "text":message}, headers=headers)
         print(response.text)
         return None
@@ -33,6 +40,17 @@ class Spark:
             "authorization": self.access_token
         }
         response = requests.get(url, headers=headers)
-        print(response.text)
-        return None
+        
+        # looks if there are any errors in getting the message and gives back the output
+        dict_response = json.loads(response.text)
+        if "error" in dict_response:
+            return False
+        return dict_response
     
+    def onHears(self, message):
+        def decorator(f):
+            self.hears_to_function[message] = f
+        return decorator
+            
+    
+
