@@ -1,12 +1,17 @@
 import requests
 import json
 
-class Spark:
+active_bot = None
+
+class SparkBot:
     
     def __init__(self, access_token):
         requests.packages.urllib3.disable_warnings()
+        
+        
         # url and the parameters
         self.url = "https://api.ciscospark.com/v1"
+        self.bot_token = access_token
         self.access_token = "Bearer " + access_token
         
         
@@ -51,6 +56,16 @@ class Spark:
         def decorator(f):
             self.hears_to_function[message] = f
         return decorator
-            
     
-
+    
+    # this function is meant to receive messages from the flask webhook listener
+    # it will then map this message to the respective function depending on the self.hears_to_function dictionary
+    # the respective function is finally carried out
+    # for instance, if the mapping is {'hi': hi_function}, and 'hi' is the message, the hi_function will be executed
+    def receiveMessage(self, message, roomId):
+        if message in self.hears_to_function:
+            message_function = self.hears_to_function[message]
+            message_function()
+        return None
+    
+    
