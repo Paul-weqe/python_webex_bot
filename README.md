@@ -1,4 +1,4 @@
-# weqe_botki
+# weqe_botkit
 
 weqe_botkit is a python library meant to easen the creation of bots within the Cisco Webex for Teams using python(popularly Cisco spark). 
 
