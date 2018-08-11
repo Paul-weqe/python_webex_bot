@@ -23,7 +23,8 @@ class SparkBot:
         
         return None
     
-    # send message to a specific party
+    # send message to a specific party or to a specific group
+    # all you need to do is specify the specific room ID of the room that the message is to be sent to 
     def sendMessage(self, room_id, message):
         api_call = "/messages"
         url = self.url + api_call
@@ -34,8 +35,9 @@ class SparkBot:
         response = requests.post(url, json={"roomId":room_id, "text":message}, headers=headers)
         print(response.text)
         return None
-        
+    
     # return more data a specific message with id <message_id> 
+    # will you EVER use this?? JHere just in case though :)
     def getMessageDetails(self, message_id):
         api_call = "/messages"
         url = self.url + api_call + "/" + message_id

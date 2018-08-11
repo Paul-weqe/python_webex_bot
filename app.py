@@ -12,6 +12,8 @@ def index():
     return "Cool"
 
 
+# this webhook is meant to listen to anything on messages side of the webhook
+# ranging from attached files to actual text messages
 @app.route("/messages", methods=["POST"])
 def messages():
     data = request.get_json()
