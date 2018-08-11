@@ -7,7 +7,7 @@ class SparkBot:
     def __init__(self, access_token):
         requests.packages.urllib3.disable_warnings()
         
-        
+        # this is it
         # url and the parameters
         self.url = "https://api.ciscospark.com/v1"
         self.bot_token = access_token
