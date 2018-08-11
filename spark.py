@@ -12,7 +12,7 @@ class SparkBot:
         self.url = "https://api.ciscospark.com/v1"
         self.bot_token = access_token
         self.access_token = "Bearer " + access_token
-        
+        self.message_data = None
         
         # this dictionary holds what will be heard to the corresponding function that the user will keep
         # for example, if you hear 'hi', and the corresponding function to handle this message is hi_function()
@@ -54,9 +54,9 @@ class SparkBot:
     
     # this is a decorator where you will write your function that you want to be mapped to a specific function, f
     # This function happens when a message, let's say 'hi' is heard
-    def onHears(self, message):
+    def onHears(self, message_text):
         def decorator(f):
-            self.hears_to_function[message] = f
+            self.hears_to_function[message_text] = f
         return decorator
     
     
@@ -68,6 +68,24 @@ class SparkBot:
         if message in self.hears_to_function:
             message_function = self.hears_to_function[message]
             message_function()
-        return None
     
+    # this function allows for a bot to be able to send a file
+    # once someone has created a bot object, this can be called and a file will be sent to a user
+    def send_attachment(self, room_id, files_path):
+        api_call = "/messages"
+        url = self.url + api_call
+        headers = {
+            "Content-Type": "application/json",
+            "authorization": self.access_token
+        }
+        # response = requests.post(url, json={"roomId":room_id, "text":message}, headers=headers)
+        response = requests.post(url, json={"roomId":room_id, "files":files_path}, headers=headers)
+        print(response.text)
+        return None
+
+
+    def messageNotUnderstood(self):
+        self.sendMessage(self.message_data["roomId"], "Sorry, could not understand what you said")
+        return None
+        # print(type(self.message_data))
     

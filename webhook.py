@@ -33,6 +33,7 @@ def messages():
 
     # print( message_json["text"])
     bot.receiveMessage( message_json["text"], message_json["roomId"] )
+    bot.message_data = message_json
     
     return "Message"
 

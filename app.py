@@ -29,10 +29,11 @@ def messages():
     response = requests.get(url, headers=headers)
     # print(type(response.text))
     message_json = json.loads(response.text)
-    print(message_json)
 
     # print( message_json["text"])
-    bot.receiveMessage( message_json["text"], message_json["roomId"] )
+    bot.message_data = message_json
+    if "text" in message_json:
+        bot.receiveMessage( message_json["text"], message_json["roomId"] )
     
     return "Message"
 
