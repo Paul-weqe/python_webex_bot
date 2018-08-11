@@ -1,7 +1,6 @@
 import requests
 import json
 
-active_bot = None
 
 class SparkBot:
     
@@ -35,7 +34,8 @@ class SparkBot:
         response = requests.post(url, json={"roomId":room_id, "text":message}, headers=headers)
         print(response.text)
         return None
-    
+        
+    # return more data a specific message with id <message_id> 
     def getMessageDetails(self, message_id):
         api_call = "/messages"
         url = self.url + api_call + "/" + message_id
@@ -52,6 +52,8 @@ class SparkBot:
             return False
         return dict_response
     
+    # this is a decorator where you will write your function that you want to be mapped to a specific function, f
+    # This function happens when a message, let's say 'hi' is heard
     def onHears(self, message):
         def decorator(f):
             self.hears_to_function[message] = f

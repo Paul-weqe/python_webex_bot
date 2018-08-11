@@ -1,7 +1,8 @@
 from flask import Flask, request
-import decorators
+import spark
 import requests
 import json
+import test
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ def index():
 @app.route("/messages", methods=["POST"])
 def messages():
     data = request.get_json()
-    bot = decorators.active_bot
+    bot = test.active_bot
     
     # 
     message_id = data['data']['id']
@@ -23,12 +24,14 @@ def messages():
         "Content-Type": "application/json",
         "authorization": "Bearer " + bot.bot_token
     }
-    
+
     # 
     response = requests.get(url, headers=headers)
-    print(type(response.text))
+    # print(type(response.text))
     message_json = json.loads(response.text)
-    
+    print(message_json)
+
+    # print( message_json["text"])
     bot.receiveMessage( message_json["text"], message_json["roomId"] )
     
     return "Message"
