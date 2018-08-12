@@ -29,12 +29,19 @@ def messages():
 
     # 
     response = requests.get(url, headers=headers)
-    # print(type(response.text))
+    # print(response.text)
     message_json = json.loads(response.text)
 
-    # print( message_json["text"])
+    # we get the json from the data that has been sent as a dictionary
     bot.message_data = message_json
-    if "text" in message_json:
+
+    # what happens if the message is a mention
+    if ("mentionedPeople" in message_json) and (message_json["roomType"] == "group"):
+        message_json["text"] = message_json["text"].replace("random ", "")
+        bot.receiveMention( message_json["text"], message_json["roomId"] )
+
+    # what happens if the message is a direct text
+    elif ( "text" in message_json ):
         bot.receiveMessage( message_json["text"], message_json["roomId"] )
     
     return "Message"

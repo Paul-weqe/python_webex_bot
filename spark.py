@@ -21,6 +21,11 @@ class SparkBot:
             
         }
         
+        # this does a specific action when a bot is mentioned in a room
+        self.mention_to_function = {
+
+        }
+
         return None
     
     # send message to a specific party or to a specific group
@@ -56,20 +61,33 @@ class SparkBot:
     
     # this is a decorator where you will write your function that you want to be mapped to a specific function, f
     # This function happens when a message, let's say 'hi' is heard
-    def onHears(self, message_text):
+    def onHears(self, message_text, mention=None):
         def decorator(f):
-            self.hears_to_function[message_text] = f
+            if mention != True:
+                self.hears_to_function[message_text] = f
+            else:
+                self.mention_to_function[message_text] = f
+
         return decorator
-    
-    
+
     # this function is meant to receive messages from the flask webhook listener
     # it will then map this message to the respective function depending on the self.hears_to_function dictionary
     # the respective function is finally carried out
     # for instance, if the mapping is {'hi': hi_function}, and 'hi' is the message, the hi_function will be executed
-    def receiveMessage(self, message, roomId):
-        if message in self.hears_to_function:
-            message_function = self.hears_to_function[message]
+    def receiveMessage(self, message_text, roomId):
+        if message_text in self.hears_to_function:
+            message_function = self.hears_to_function[message_text]
             message_function()
+
+    # looks when a bot is mentioned in a room for example, "Hello @myBot"
+    # the function that handles a specific action will be looked up at self.mention_to_function
+    # the function mapped to the mention is then be carried out
+    def receiveMention(self, message_text, roomId):
+        if message_text in self.mention_to_function:
+            mention_function  = self.mention_to_function[message_text]
+            mention_function()
+            return None
+        return None
     
     # this function allows for a bot to be able to send a file
     # once someone has created a bot object, this can be called and a file will be sent to a user
@@ -82,12 +100,4 @@ class SparkBot:
         }
         # response = requests.post(url, json={"roomId":room_id, "text":message}, headers=headers)
         response = requests.post(url, json={"roomId":room_id, "files":files_path}, headers=headers)
-        print(response.text)
         return None
-
-
-    def messageNotUnderstood(self):
-        self.sendMessage(self.message_data["roomId"], "Sorry, could not understand what you said")
-        return None
-        # print(type(self.message_data))
-    

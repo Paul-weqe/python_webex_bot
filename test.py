@@ -31,3 +31,24 @@ def send_file():
 -------
 
 """
+
+from spark import SparkBot
+
+myBot = SparkBot("OWE5MzZlMWMtMWVjNS00ZDY4LTliYTctYzM3NTYxMWUwMzZmMTZkMGNjZmYtMTg1")
+active_bot = myBot
+
+@myBot.onHears("Hi")
+def respond_to_hi():
+	room_id = myBot.message_data["roomId"]
+	myBot.sendMessage(room_id, "hi there too :)")
+
+@myBot.onHears("Cool", mention=True)
+def respond_to_cool_mention():
+	room_id = myBot.message_data["roomId"]
+	myBot.sendMessage( room_id, "coooool")
+
+@myBot.onHears("Sarri", mention=True)
+def respond_to_sarri_mention():
+	room_id = myBot.message_data["roomId"]
+	myBot.send_attachment(room_id, "https://cdn.images.express.co.uk/img/dynamic/67/590x/Chelsea-team-news-1002186.jpg?r=1534028634745")
+	myBot.sendMessage(room_id, "There you go")
