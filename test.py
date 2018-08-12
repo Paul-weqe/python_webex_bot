@@ -34,7 +34,7 @@ def send_file():
 
 from spark import SparkBot
 
-myBot = SparkBot("OWE5MzZlMWMtMWVjNS00ZDY4LTliYTctYzM3NTYxMWUwMzZmMTZkMGNjZmYtMTg1")
+myBot = SparkBot("your_auth_key")
 active_bot = myBot
 
 @myBot.onHears("Hi")
