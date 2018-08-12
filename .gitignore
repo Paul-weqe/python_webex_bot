@@ -1,3 +1,6 @@
 tests.py
 decorators.py
-__pycache__.*
+__pycache__
+Procfile
+__init__.py
+runtime.txt
