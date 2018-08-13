@@ -53,9 +53,9 @@ def respond_to_sarri():
 def respond_to_cool_mention():
 	room_id = myBot.message_data["roomId"]
 	myBot.sendMessage( room_id, "coooool")
-
+"""
 @myBot.onHears("Sarri", mention=True)
 def respond_to_sarri_mention():
 	room_id = myBot.message_data["roomId"]
 	myBot.send_attachment(room_id, "https://cdn.images.express.co.uk/img/dynamic/67/590x/Chelsea-team-news-1002186.jpg?r=1534028634745")
-	myBot.sendMessage(room_id, "There you go") 
+	myBot.sendMessage(room_id, "There you go") """
