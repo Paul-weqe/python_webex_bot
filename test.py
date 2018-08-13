@@ -39,6 +39,7 @@ active_bot = myBot
 
 @myBot.onHears("Hi")
 def respond_to_hi():
+	print("Hae...")
 	room_id = myBot.message_data["roomId"]
 	myBot.sendMessage(room_id, "hi there too :)")
 
