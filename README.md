@@ -1,10 +1,16 @@
-weqe_sparkbot is a python library meant to easen the creation of bots within the Cisco Webex for Teams using python(popularly Cisco spark). 
+# weqe_chatbot
 
-There have been previous solutions that have been implemented but the main issue being the creation of constant webhooks. This prject plans to use Flask to maintain and listen on these webhooks and thus one can receive immediate update when e.g a message is sent to the bot. This solution is also meant to be minimalistic and will only go more that five files if conditioins force this to happen. We hope to give you a good python3 webex solution by the end of this project. 
+weqe_chatbot is a python library that is meant to provide an easy way for developers to create constant and active webhook. The project will mainly involve listening through a flask webhook and having the bot's actions performed according to sprcific ways that are specified by the programmer. 
 
-*Development is currently underway, join in if interested. Documentation will be out soon enough* 
+## getting started
 
-You can get the library by entering the following line in your terminal
+### prerequisites
+
+The following are the mininimal requirements that are required by the time you have downloaded the repository to get it up and running:
+	- python3
+	- virtualenv
+
+You download the required files by entering the following line in your terminal
 
 ```
 git clone https://github.com/Paul-weqe/weqe_sparkbot.git
@@ -15,14 +21,19 @@ After this, go into the folder that has been cloned
 ```
 cd weqe_sparkbot
 ```
+
 Then create a virtual environment to work with and activate it:
 ```
 virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
+### installation
+
 Install all the requirements to be able to run the application successfully
 `pip3 install -r requirements.txt`
+
+### running the app
 
 start the flask app, which will act as the webhook. Type the following command in the terminal
 
@@ -36,6 +47,43 @@ This should be enough to expose the app to the internet. Follow the following li
 
 *If you close the ngrok service and start it again, make sure to create the webhook again via the cisco spark tutorial*
 
+## writing a basic bot
+
+You have to write your code in the test.py file, which is where the webhook will be listening for any messages that are directed to the bot. The following is a sample of a program that will say "Hi too" to anyone who says "Hi"
+
+```
+from spark import SparkBot
+
+myBot = SparkBot("your_auth_key")
+active_bot = myBot 		# this line is crutial for the webhook to know which bot is being specified to listen to
+
+@myBot.onHears("Hi")
+def respond_to_hi():
+    room_id = myBot.message_data["roomId"]
+    myBot.sendMessage(room_id, "Hi too")
+```
+
+## attaching file while responding to a message
+
+One may also need to attach a file while sending a response to a specific event. The following is how the function to do this will be written:
+
+```
+@myBot.onHears("send me an image")
+def send_image():
+    room_id = myBot.message_data["roomId"]
+    myBot.sendAttachment(room_id, "https://pbs.twimg.com/profile_images/831938838935203840/eGVNy9b7_400x400.jpg")
+```
+
+## respond to mention from a space
+
+The following is if one wants to respond to when someone mentions the bot in a space or a room:
+
+```
+@myBot.onHears("send me something", mention=True)
+def respond_to_mention():
+    room_id = myBot.message_data["roomId"]
+    myBot.sendAttachment(room_id, "https://pbs.twimg.com/profile_images/831938838935203840/eGVNy9b7_400x400.jpg")
+```
 
 ## Explanation of the files
 ##### 1. app.py
@@ -52,24 +100,4 @@ This file holds the main API class, SparkBot. Using this class, a user can creat
 
 This is where the programmer will write the actual code that will be running the bot. For example, the following lines may be written in the file to create an instance and to take an action
 
-```
-@myBot.onHears('How are you?')
-def respond_to_hi():
-	room_id = myBot.message_data["roomId"] # the message_data contains information about the most recent message.
-										   # You can just type print(message_data) to see what other information it holds
-    myBot.sendMessage(room_id, "Im fine")
-
-
-# to send an attachment when a user requires one, write the following
-@myBot.onHears("Send me a file")
-def send_file(): 
-	room_id = myBot.message_data["roomId"]
-	myBot.send_attachment(room_id, ["link_to_attached file"]) # replace link_to_attached_file 
-
-	# take note that the link put cannot be a path to a file in your directory. It must be a file from a server online or something like that
-	# for example 'link_to_attached_file' may be 'https://sample_site.com/image.jpg'
-
-```
-
-*More documentation and more improvements to be uploaded soon enough*
-*Reach out to any of the contributor(s) for any help or constructive feedback that may help in improvement of the library :)*
+*More features will be added and the documentation will be updated to fit the growth. Have a blast, and feel free to contribure. :)*
