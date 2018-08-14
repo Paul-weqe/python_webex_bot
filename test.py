@@ -58,5 +58,11 @@ def respond_to_sarri():
 @myBot.onHears("Sarri", mention=True)
 def respond_to_sarri_mention():
 	room_id = myBot.message_data["roomId"]
-	myBot.send_attachment(room_id, "https://cdn.images.express.co.uk/img/dynamic/67/590x/Chelsea-team-news-1002186.jpg?r=1534028634745")
-	myBot.sendAttachment(room_id, "There you go") 
+	myBot.sendAttachment(room_id, "https://cdn.images.express.co.uk/img/dynamic/67/590x/Chelsea-team-news-1002186.jpg?r=1534028634745")
+	myBot.sendMessage(room_id, "There you go") 
+
+@myBot.onHears("Mourinho")
+def respond_to_mourinho():
+	room_id = myBot.message_data["roomId"]
+	myBot.sendAttachment(room_id, "https://cdn.images.dailystar.co.uk/dynamic/58/photos/302000/620x/Jose-Mourinho-722711.jpg")
+	myBot.sendMessage(room_id, "Manchester united")
