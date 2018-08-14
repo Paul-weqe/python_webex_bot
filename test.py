@@ -34,9 +34,10 @@ def send_file():
 
 from spark import SparkBot
 
-myBot = SparkBot("api_authentication_key")
+myBot = SparkBot("OWE5MzZlMWMtMWVjNS00ZDY4LTliYTctYzM3NTYxMWUwMzZmMTZkMGNjZmYtMTg1")
 active_bot = myBot
 
+# going to use 
 @myBot.onHears("Hi")
 def respond_to_hi():
 	print("Hae...")
