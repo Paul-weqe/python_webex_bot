@@ -1,7 +1,5 @@
-tests.py
-decorators.py
-__pycache__
 Procfile
-__init__.py
 runtime.txt
+requirements.txt
+__pycache__/*
 
