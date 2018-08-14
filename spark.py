@@ -27,7 +27,7 @@ class SparkBot:
         }
 
         return None
-    
+        
     # send message to a specific party or to a specific group
     # all you need to do is specify the specific room ID of the room that the message is to be sent to 
     def sendMessage(self, room_id, message):
@@ -91,7 +91,7 @@ class SparkBot:
     
     # this function allows for a bot to be able to send a file
     # once someone has created a bot object, this can be called and a file will be sent to a user
-    def send_attachment(self, room_id, files_path):
+    def sendAttachment(self, room_id, files_path):
         api_call = "/messages"
         url = self.url + api_call
         headers = {
