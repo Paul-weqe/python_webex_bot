@@ -1,5 +1,5 @@
 Procfile
 runtime.txt
-requirements.txt
 __pycache__/*
-
+/venv/*
+.vscode
