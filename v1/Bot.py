@@ -12,7 +12,7 @@ class Bot(People, Room, Webhook, Message):
         # self.hears to function maps when a specific word is heard to a function
         # for example, when one says 'hi' and you want to map it to say_hi() function
         self.hears_to_function = {
-
+            
         }
 
     """
@@ -23,6 +23,8 @@ class Bot(People, Room, Webhook, Message):
             self.hears_to_function[message_text] = f
         
         return hear_decorator
+    
+    
     
 
 
