@@ -1,7 +1,7 @@
-from People import People
-from Room import Room
-from Webhook import Webhook
-from Message import Message
+from v1.People import People
+from v1.Room import Room
+from v1.Webhook import Webhook
+from v1.Message import Message
 
 
 
@@ -24,5 +24,6 @@ class Bot(People, Room, Webhook, Message):
         
         return hear_decorator
     
-    def get_info(self):
-        return "info"
+
+
+
