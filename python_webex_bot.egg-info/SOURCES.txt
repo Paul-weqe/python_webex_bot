@@ -1,0 +1,16 @@
+README.md
+setup.py
+python_webex_bot.egg-info/PKG-INFO
+python_webex_bot.egg-info/SOURCES.txt
+python_webex_bot.egg-info/dependency_links.txt
+python_webex_bot.egg-info/top_level.txt
+tests/__init__.py
+tests/v1/__init__.py
+tests/v1/test_bot_requests.py
+v1/Bot.py
+v1/Message.py
+v1/People.py
+v1/Room.py
+v1/Webhook.py
+v1/__init__.py
+webhook/__init__.py

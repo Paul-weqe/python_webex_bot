@@ -1,27 +1,15 @@
 import requests 
 import sys
-import os 
-
-URL = "https://api.ciscospark.com/"
-auth_token = os.getenv("auth_token")
-
-if auth_token == None:
-    sys.exit("'auth_token' not set in environment variables")
-
-headers = {
-    "Authorization": "Bearer " + auth_token,
-    "Content-Type": "application/json"
-}
-
 
 class Message:
 
     # Message requests uses URL https://api.ciscospark.com/v1/messages
     
-    def send_message(self, roomId=None, text=None):
+    def send_message(self, files=[], roomId=None, text=None):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
+        'files' is a list of the files(images, audios etc) you want to send to the user
         """
 
         if roomId == None:
@@ -30,14 +18,18 @@ class Message:
         if text == None:
             sys.exit("'text' is a required field")
 
+        if type(files) != list:
+            sys.exit("'files' needs to be a list")
+
         url_route = "messages"
 
         data = {
             "roomId": roomId,
             "text": text,
+            "files": files
         }
         
-        data = requests.post( URL + url_route, headers=headers, json=data )
+        data = requests.post( self.URL + url_route, headers=self.headers, json=data )
         return data
 
     def list_messages(self, roomId=None):
@@ -54,7 +46,7 @@ class Message:
         params = {
             "roomId": roomId
         }
-        data = requests.get( URL + url_route, headers=headers, params=params )
+        data = requests.get( self.URL + url_route, headers=self.headers, params=params )
         return data
     
     def list_direct_messages(self, personId=None):
@@ -71,7 +63,7 @@ class Message:
         params = {
             "personId": personId
         }
-        data = requests.get( URL + url_route + "/direct", headers=headers, params=params )
+        data = requests.get( self.URL + url_route + "/direct", headers=self.headers, params=params )
         return data
     
     def get_message_details(self, messageId=None):
@@ -86,7 +78,7 @@ class Message:
         
         url_route = "messages/" + messageId
 
-        data = requests.get( URL + url_route, headers=headers)
+        data = requests.get( self.URL + url_route, headers=self.headers)
         return data
 
     def delete_message(self, messageId=None):
@@ -100,5 +92,5 @@ class Message:
         
         url_route = "messages/" + messageId
 
-        data = requests.delete( URL + url_route, headers=headers )
+        data = requests.delete( self.URL + url_route, headers=self.headers )
         return data

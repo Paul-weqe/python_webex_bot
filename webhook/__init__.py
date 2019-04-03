@@ -10,13 +10,20 @@ def index():
     
     message_id = json_data[ "data" ][ "id" ]
     message_info = bot.get_message_details( messageId=message_id ).json()
+
     print(message_info)
     
     if message_info[ "personId" ] == bot.get_own_details().json()[ 'id' ]:
         return "cannot respond to my own messages"
     
-    message_text = message_info[ "text" ]
-    bot.hears_to_function[ message_text ]( room_id=message_info["roomId"] )
+    if message_info['text'] != '':
+        message_text = message_info[ "text" ]
+        bot.hears_to_function[ message_text ]( room_id=message_info["roomId"] )
     
+    if 'files' in message_info:
+        pass
+
     return "successfully responded"
+
+
 

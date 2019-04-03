@@ -1,17 +1,5 @@
 import requests
 import sys
-import os 
-
-URL = "https://api.ciscospark.com/"
-auth_token = os.getenv("auth_token")
-
-if auth_token == None:
-    sys.exit("'auth_token' not set in environment variables")
-
-headers = {
-    "Authorization": "Bearer " + auth_token,
-    "Content-Type": "application/json"
-}
 
 class Webhook:
 
@@ -24,7 +12,7 @@ class Webhook:
 
         url_route = "webhooks"
 
-        data = requests.get(URL + url_route, headers=headers)
+        data = requests.get( self.URL + url_route, headers=self.headers)
 
         return data
     
@@ -53,7 +41,7 @@ class Webhook:
             "name": name, "targetUrl": targetUrl, "resource": resource, "event": event
         }
 
-        data = requests.post(URL + url_route, headers=headers, json=json)
+        data = requests.post( self.URL + url_route, headers=self.headers, json=json )
         return data
     
     def delete_webhook(self, webhookId=None):
@@ -68,7 +56,7 @@ class Webhook:
         if webhookId == None:
             sys.exit("'webhookId' is a required field")
         
-        data = requests.delete(URL + url_route + "/" + webhookId, headers=headers)
+        data = requests.delete( self.URL + url_route + "/" + webhookId, headers=self.headers )
         return data
     
     def update_webhook(self, webhookId=None, name=None, targetUrl=None):
@@ -96,7 +84,7 @@ class Webhook:
             "name": name, "targetUrl": targetUrl
         }
 
-        data = requests.put( URL + url_route + "/" + webhookId, json=json, headers=headers )
+        data = requests.put( self.URL + url_route + "/" + webhookId, json=json, headers=self.headers )
         return data
     
     def get_webhook_details(self, webhookId=None):
@@ -111,5 +99,5 @@ class Webhook:
         if webhookId == None:
             sys.exit("'webhookId' is a required field")
         
-        data = requests.get(URL + url_route, headers=headers)
+        data = requests.get( self.URL + url_route, headers=self.headers)
         return data

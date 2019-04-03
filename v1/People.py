@@ -1,18 +1,5 @@
 import sys 
 import requests
-import os 
-
-URL = "https://api.ciscospark.com/"
-auth_token = os.getenv("auth_token")
-
-if auth_token == None:
-    sys.exit("'auth_token' not set in environment variables")
-
-headers = {
-    "Authorization": "Bearer " + auth_token,
-    "Content-Type": "application/json"
-}
-
 
 
 class People:
@@ -31,7 +18,7 @@ class People:
         params = {
             "email": email
         }
-        data = requests.get( URL + url_route, headers=headers, params=params)
+        data = requests.get( self.URL + url_route, headers=self.headers, params=params)
         return data
     
     def get_person_details(self, personId=None):
@@ -46,7 +33,7 @@ class People:
         
         url_route = "people"
 
-        data = requests.get( URL + url_route + "/" + personId, headers=headers )
+        data = requests.get( self.URL + url_route + "/" + personId, headers=self.headers )
         return data
         
     
@@ -59,6 +46,6 @@ class People:
 
         url_route = "people/me"
 
-        data = requests.get(URL + url_route, headers=headers)
+        data = requests.get( self.URL + url_route, headers=self.headers )
         return data
 

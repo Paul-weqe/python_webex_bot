@@ -1,17 +1,5 @@
 import requests
 import sys
-import os 
-
-URL = "https://api.ciscospark.com/"
-auth_token = os.getenv("auth_token")
-
-if auth_token == None:
-    sys.exit("'auth_token' not set in environment variables")
-
-headers = {
-    "Authorization": "Bearer " + auth_token,
-    "Content-Type": "application/json"
-}
 
 class Room:
     
@@ -22,7 +10,7 @@ class Room:
         details on the rooms URL can be found in: https://developer.webex.com/docs/api/v1/rooms/list-rooms
         """
         url_route = "rooms"
-        data = requests.get( URL + url_route, headers=headers)
+        data = requests.get( self.URL + url_route, headers=self.headers)
         return data
     
     def create_room( self, title=None, teamId=None, room_type=None ):
@@ -48,7 +36,7 @@ class Room:
         if room_type != None:
             json["type"] = room_type
 
-        data = requests.post( URL+url_route, json=json, headers=headers)
+        data = requests.post( self.URL+url_route, json=json, headers=self.headers)
         return data
 
     def get_room_details(self, roomId=None):
@@ -63,7 +51,7 @@ class Room:
         
         url_route="rooms"
 
-        data = requests.get( URL+url_route+"/"+roomId, headers=headers )
+        data = requests.get( self.URL+url_route+"/"+roomId, headers=self.headers )
         return data
 
     def update_room_details(self, roomId=None, title=None):
@@ -85,7 +73,7 @@ class Room:
 
         url_route = "rooms"
 
-        data = requests.put( URL + url_route + '/' + roomId,  json=json, headers=headers)
+        data = requests.put( self.URL + url_route + '/' + roomId,  json=json, headers=self.headers)
         return data
     
     def delete_room(self, roomId=None):
@@ -99,6 +87,6 @@ class Room:
             sys.exit("'roomId' is a required field")
         
         url_route = "rooms"
-        data = requests.delete( URL + url_route + "/" +roomId, headers=headers )
+        data = requests.delete( self.URL + url_route + "/" +roomId, headers=self.headers )
         return data
 
