@@ -4,6 +4,7 @@
 # python_webex_bot
 
 A python3 library meant to help you create a cisco webex teams bot and take advantage of some of the features available to these bots. 
+Most of the python libraries setup for webex have been lacking in terms of connecting you to a webhook and this aims at solving that
 
 ## Installation and setup
 
