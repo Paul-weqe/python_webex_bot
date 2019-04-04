@@ -1,4 +1,5 @@
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/Paul-weqe/python_webex_bot)
+[![PyPI version](https://badge.fury.io/py/python-webex-bot.svg)](https://badge.fury.io/py/python-webex-bot)
 
 # python_webex_bot
 
