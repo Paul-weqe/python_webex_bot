@@ -5,7 +5,7 @@ class Message:
 
     # Message requests uses URL https://api.ciscospark.com/v1/messages
     
-    def send_message(self, files=[], roomId=None, text=None):
+    def send_message(self, roomId=None, text=None, files=[]):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
@@ -23,11 +23,14 @@ class Message:
 
         url_route = "messages"
 
+
         data = {
             "roomId": roomId,
             "text": text,
-            "files": files
         }
+
+        if len(files) > 0:
+            data["files"] = files
         
         data = requests.post( self.URL + url_route, headers=self.headers, json=data )
         return data

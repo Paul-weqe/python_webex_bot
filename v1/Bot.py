@@ -1,7 +1,13 @@
-from People import People
-from Room import Room
-from Webhook import Webhook
-from Message import Message
+from python_webex_bot.v1.People import People
+from python_webex_bot.v1.Room import Room
+from python_webex_bot.v1.Webhook import Webhook
+from python_webex_bot.v1.Message import Message
+
+# from People import People
+# from Room import Room 
+# from Webhook import Webhook
+# from Message import Message
+
 
 import os
 import sys
@@ -39,20 +45,3 @@ class Bot(People, Room, Webhook, Message):
 
         return hear_decorator
 
-bot = Bot()
-
-print(
-    bot.send_message(
-        files=[
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1200px-Flag_of_Kenya.svg.png"
-            ],
-        roomId="Y2lzY29zcGFyazovL3VzL1JPT00vNGZjNzliMWItODg3Mi0zYThlLTk3MGItZDNlYmQ4YmI2ZTc3",
-        text="Make it"
-    )
-)
-
-# print(
-#     bot.send_message(
-#         roomId="Y2lzY29zcGFyazovL3VzL1JPT00vNGZjNzliMWItODg3Mi0zYThlLTk3MGItZDNlYmQ4YmI2ZTc3", text="Not working...",
-#     )
-# )
