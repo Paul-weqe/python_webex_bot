@@ -1,4 +1,4 @@
-[![PyPI version](https://badge.fury.io/py/python-webex-bot.svg)](https://badge.fury.io/py/python-webex-bot)
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/Paul-weqe/python_webex_bot)
 
 # python_webex_bot
 
@@ -135,3 +135,5 @@ Now, when we text our bot "hi", it will respond with "Hi, how are you doing?"
 
 And when we text anything else, like "When can we meet up?" it will respond with "Sorry, I could not understand that"
 
+
+<b><i>MORE DOCUMENTATION TO BE SETUP SHORTLY</i></b>
