@@ -1,13 +1,7 @@
-from python_webex_bot.v1.People import People
-from python_webex_bot.v1.Room import Room
-from python_webex_bot.v1.Webhook import Webhook
-from python_webex_bot.v1.Message import Message
-
-# from People import People
-# from Room import Room 
-# from Webhook import Webhook
-# from Message import Message
-
+from v1.People import People
+from v1.Room import Room
+from v1.Webhook import Webhook
+from v1.Message import Message
 
 import os
 import sys
