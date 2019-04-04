@@ -16,7 +16,7 @@ class Webhook:
 
         return data
     
-    def create_webhook(self, name=None, targetUrl=None, resource=None, event=None):
+    def create_webhook(self, name=None, target_url=None, resource=None, event=None):
         """
         Enables one to create a webhook that will be listening to events sent to the bot
         uses the https://api.ciscospark.com/v1/webhooks - POST request
@@ -28,7 +28,7 @@ class Webhook:
         if name == None:
             sys.exit("'name' is a required field")
         
-        elif targetUrl == None:
+        elif target_url == None:
             sys.exit("'targetUrl' is a required field")
         
         elif resource == None:
@@ -41,17 +41,17 @@ class Webhook:
         # cause apparently Cisco does not do that for us when creating webhooks. But tis all good :)
         existing_webhooks = self.get_all_webhooks().json()
         for webhook in existing_webhooks['items']:
-            if webhook['targetUrl'] == targetUrl:
+            if webhook['targetUrl'] == target_url:
                 return self.get_webhook_details( webhookId = webhook['id'])
 
         json = {
-            "name": name, "targetUrl": targetUrl, "resource": resource, "event": event
+            "name": name, "targetUrl": target_url, "resource": resource, "event": event
         }
 
         data = requests.post( self.URL + url_route, headers=self.headers, json=json )
         return data
     
-    def delete_webhook(self, webhookId=None):
+    def delete_webhook(self, webhook_id=None):
         """
         Deletes a webhook that has ID webhookId
         uses the https://api.ciscospark.com/webhooks - DELETE request
@@ -60,13 +60,13 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if webhookId == None:
+        if webhook_id == None:
             sys.exit("'webhookId' is a required field")
         
-        data = requests.delete( self.URL + url_route + "/" + webhookId, headers=self.headers )
+        data = requests.delete( self.URL + url_route + "/" + webhook_id, headers=self.headers )
         return data
     
-    def update_webhook(self, webhookId=None, name=None, targetUrl=None):
+    def update_webhook(self, webhook_id=None, name=None, target_url=None):
         """
         'name' is the updated name of the webhook
         'targetUrl' is the updated targetUrl of the webhook
@@ -78,23 +78,23 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if webhookId == None:
+        if webhook_id == None:
             sys.exit("'webhookId' is a required field")
         
         elif name == None:
             sys.exit("'name' is a required field")
         
-        elif targetUrl == None:
+        elif target_url == None:
             sys.exit("'targetUrl' is a required field")
         
         json = {
-            "name": name, "targetUrl": targetUrl
+            "name": name, "targetUrl": target_url
         }
 
-        data = requests.put( self.URL + url_route + "/" + webhookId, json=json, headers=self.headers )
+        data = requests.put( self.URL + url_route + "/" + webhook_id, json=json, headers=self.headers )
         return data
     
-    def get_webhook_details(self, webhookId=None):
+    def get_webhook_details(self, webhook_id=None):
         """
         Get the details of a single webhook with id of webhookId
         uses https://api.ciscospark.com/webhooks/{roomId} - GET request
@@ -103,7 +103,7 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if webhookId == None:
+        if webhook_id == None:
             sys.exit("'webhookId' is a required field")
         
         data = requests.get( self.URL + url_route, headers=self.headers)

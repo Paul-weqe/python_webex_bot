@@ -21,19 +21,19 @@ class People:
         data = requests.get( self.URL + url_route, headers=self.headers, params=params)
         return data
     
-    def get_person_details(self, personId=None):
+    def get_person_details(self, person_id=None):
         """
         returns specific information of the person with ID personId
         uses https://api.ciscospark.com/people/{ personId } - GET request
         API reference can be found in: https://developer.webex.com/docs/api/v1/people/get-person-details 
         """
 
-        if personId ==  None:
+        if person_id ==  None:
             sys.exit("'personId' is a required field")
         
         url_route = "people"
 
-        data = requests.get( self.URL + url_route + "/" + personId, headers=self.headers )
+        data = requests.get( self.URL + url_route + "/" + person_id, headers=self.headers )
         return data
         
     

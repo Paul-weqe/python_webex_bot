@@ -5,14 +5,14 @@ class Message:
 
     # Message requests uses URL https://api.ciscospark.com/v1/messages
     
-    def send_message(self, roomId=None, text=None, files=[]):
+    def send_message(self, room_id=None, text=None, files=[]):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
         'files' is a list of the files(images, audios etc) you want to send to the user
         """
 
-        if roomId == None:
+        if room_id == None:
             sys.exit("'roomId' is a required field")
         
         if text == None:
@@ -34,7 +34,7 @@ class Message:
         data = requests.post( self.URL + url_route, headers=self.headers, json=data )
         return data
 
-    def get_messages(self, roomId=None):
+    def get_messages(self, room_id=None):
         """
         gets all the messages sent and received in a specific room
         details on the list-messages URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/list-messages
@@ -46,36 +46,36 @@ class Message:
         url_route = "messages"
 
         params = {
-            "roomId": roomId
+            "roomId": room_id
         }
         data = requests.get( self.URL + url_route, headers=self.headers, params=params )
         return data
     
-    def get_direct_messages(self, personId=None):
+    def get_direct_messages(self, person_id=None):
         """
         gets a list of all the messages sent in 1 to 1 rooms. This is basically a list all the DMs :)
         details on the list-direct-messages URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/list-direct-messages 
         """
         
-        if personId == None:
+        if person_id == None:
             sys.exit("'personId' is a mandatory field")
 
         url_route = "messages"
 
         params = {
-            "personId": personId
+            "personId": person_id
         }
         data = requests.get( self.URL + url_route + "/direct", headers=self.headers, params=params )
         return data
     
-    def get_message_details(self, messageId=None):
+    def get_message_details(self, message_id=None):
         """
         gets details of a specific message
         e.g roomId, roomType, created, mentionedPeople ...
         details on the get message details URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/get-message-details
         """
 
-        if messageId == None:
+        if message_id == None:
             sys.exit("'messageId' is a required field")
         
         url_route = "messages/" + messageId
@@ -83,16 +83,16 @@ class Message:
         data = requests.get( self.URL + url_route, headers=self.headers)
         return data
 
-    def delete_message(self, messageId=None):
+    def delete_message(self, message_id=None):
         """
         deletes a message with ID messageId
         details on the delete message URL can be found in https://developer.webex.com/docs/api/v1/messages/delete-a-message
         """
 
-        if messageId == None:
+        if message_id == None:
             sys.exit("'messageId' is not a required field")
         
-        url_route = "messages/" + messageId
+        url_route = "messages/" + message_id
 
         data = requests.delete( self.URL + url_route, headers=self.headers )
         return data
