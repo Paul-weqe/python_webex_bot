@@ -4,7 +4,7 @@ import requests
 
 class People:
 
-    def list_people(self, email=None):
+    def get_people(self, email=None):
         """
         gets a list of people with a particular attribute
         uses https://api.ciscospark.com/people - GET request

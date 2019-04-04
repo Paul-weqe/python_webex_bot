@@ -3,7 +3,7 @@ import sys
 
 class Webhook:
 
-    def list_all_wekhooks(self):
+    def get_all_wekhooks(self):
         """
         GETS A LIST OF ALL THE WEBHOOKS CURRENTLY CONNECTED TO YOUR BOT
         uses the https://api.ciscospark.com/v1/webhooks - GET request

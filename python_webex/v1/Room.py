@@ -3,7 +3,7 @@ import sys
 
 class Room:
     
-    def list_all_rooms(self):
+    def get_all_rooms(self):
         """
         Gives a list of all the rooms the specific bot is in
         this request uses url https://api.ciscospark.com/rooms 

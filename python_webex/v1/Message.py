@@ -23,7 +23,6 @@ class Message:
 
         url_route = "messages"
 
-
         data = {
             "roomId": roomId,
             "text": text,
@@ -35,7 +34,7 @@ class Message:
         data = requests.post( self.URL + url_route, headers=self.headers, json=data )
         return data
 
-    def list_messages(self, roomId=None):
+    def get_messages(self, roomId=None):
         """
         gets all the messages sent and received in a specific room
         details on the list-messages URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/list-messages
@@ -52,7 +51,7 @@ class Message:
         data = requests.get( self.URL + url_route, headers=self.headers, params=params )
         return data
     
-    def list_direct_messages(self, personId=None):
+    def get_direct_messages(self, personId=None):
         """
         gets a list of all the messages sent in 1 to 1 rooms. This is basically a list all the DMs :)
         details on the list-direct-messages URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/list-direct-messages 
