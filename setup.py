@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.1",
+    version="0.2",
     script=["python_webex_bot"],
     author="Paul-weqe",
     author_email="paul1tw1@gmail.com",
     description="a python library that can be used to create Cisco Webex Team bots",
     long_description=long_description,
-    long_description_context_type="text/markdown",
+    long_description_content_type="text/markdown",
     url="https://github.com/Paul-weqe/python_webex_bot",
     packages=setuptools.find_packages(),
     classifiers=[

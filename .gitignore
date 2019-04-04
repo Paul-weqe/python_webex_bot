@@ -3,7 +3,7 @@ runtime.txt
 */__pycache__/*
 /venv/*
 .vscode
-.pytest_cache
+.pytest_cache/
 */python_webex_bot.egg-info/*
 /dist/*
 /build/*
