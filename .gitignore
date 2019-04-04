@@ -1,7 +1,7 @@
 Procfile
 runtime.txt
 */__pycache__/*
-/python_webex_bot.egg-info/*
+/python_webex_bot.egg-info/
 /__pycache__/*
 /venv/*
 .vscode
