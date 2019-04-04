@@ -6,7 +6,8 @@ chardet
 Click
 colorama
 coverage
-decoratorFlask
+decorator
+Flask
 idna
 itsdangerous
 jedi

@@ -3,7 +3,7 @@ import sys
 
 class Webhook:
 
-    def get_all_wekhooks(self):
+    def get_all_webhooks(self):
         """
         GETS A LIST OF ALL THE WEBHOOKS CURRENTLY CONNECTED TO YOUR BOT
         uses the https://api.ciscospark.com/v1/webhooks - GET request
@@ -11,7 +11,7 @@ class Webhook:
         """
 
         url_route = "webhooks"
-
+        
         data = requests.get( self.URL + url_route, headers=self.headers)
 
         return data
@@ -36,6 +36,13 @@ class Webhook:
         
         elif event == None:
             sys.exit("'event' is a required field")
+        
+        # check for if a webhook with this URL already exists for this particular bot
+        # cause apparently Cisco does not do that for us when creating webhooks. But tis all good :)
+        existing_webhooks = self.get_all_webhooks().json()
+        for webhook in existing_webhooks['items']:
+            if webhook['targetUrl'] == targetUrl:
+                return self.get_webhook_details( webhookId = webhook['id'])
 
         json = {
             "name": name, "targetUrl": targetUrl, "resource": resource, "event": event

@@ -11,7 +11,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.52",
+    version="0.56",
     scripts=["python_webex_bot"],
     author="Paul-weqe",
     author_email="paul1tw1@gmail.com",
@@ -29,7 +29,7 @@ setuptools.setup(
         "Click",
         "colorama",
         "coverage",
-        "decorator"
+        "decorator",
         "Flask",
         "idna",
         "itsdangerous",

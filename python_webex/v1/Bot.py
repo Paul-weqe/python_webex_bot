@@ -1,7 +1,7 @@
-from v1.People import People
-from v1.Room import Room
-from v1.Webhook import Webhook
-from v1.Message import Message
+from python_webex.v1.People import People
+from python_webex.v1.Room import Room
+from python_webex.v1.Webhook import Webhook
+from python_webex.v1.Message import Message
 
 import os
 import sys
@@ -22,7 +22,7 @@ class Bot(People, Room, Webhook, Message):
             "Authorization": "Bearer " + self.auth_token,
             "Content-Type": "application/json"
         }
-
+        
         # self.hears to function maps when a specific word is heard to a function
         # for example, when one says 'hi' and you want to map it to say_hi() function
         self.hears_to_function = {
