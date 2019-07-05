@@ -24,7 +24,7 @@ class Message:
         url_route = "messages"
 
         data = {
-            "roomId": roomId,
+            "roomId": room_id,
             "text": text,
         }
 
@@ -40,7 +40,7 @@ class Message:
         details on the list-messages URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/list-messages
         """
 
-        if roomId == None:
+        if room_id == None:
             sys.exit("'roomId' is a required field")
         
         url_route = "messages"
@@ -78,7 +78,7 @@ class Message:
         if message_id == None:
             sys.exit("'messageId' is a required field")
         
-        url_route = "messages/" + messageId
+        url_route = "messages/" + message_id
 
         data = requests.get( self.URL + url_route, headers=self.headers)
         return data

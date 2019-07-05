@@ -1,8 +1,9 @@
 import requests
 import sys
 
+
 class Room:
-    
+
     def get_all_rooms(self):
         """
         Gives a list of all the rooms the specific bot is in
@@ -10,20 +11,20 @@ class Room:
         details on the rooms URL can be found in: https://developer.webex.com/docs/api/v1/rooms/list-rooms
         """
         url_route = "rooms"
-        data = requests.get( self.URL + url_route, headers=self.headers)
+        data = requests.get(self.URL + url_route, headers=self.headers)
         return data
-    
-    def create_room( self, title=None, team_id=None, room_type=None ):
+
+    def create_room(self, title=None, team_id=None, room_type=None):
         """
         Creates a room within a team, also known as a space. This will be within the team with ID teamId
         this request uses url https://api.ciscospark.com - POST request
         details on the create rooms can be found in https://developer.webex.com/docs/api/v1/rooms/create-a-room 
         """
 
-        if title == None:
+        if title is None:
             sys.exit("'title' is a required field")
-        
-        if team_id == None:
+
+        if team_id is None:
             sys.exit("'teamId; is a required field")
 
         url_route = "rooms"
@@ -33,10 +34,10 @@ class Room:
             "title": title
         }
 
-        if room_type != None:
+        if room_type is not None:
             json["type"] = room_type
 
-        data = requests.post( self.URL+url_route, json=json, headers=self.headers)
+        data = requests.post(self.URL + url_route, json=json, headers=self.headers)
         return data
 
     def get_room_details(self, room_id=None):
@@ -46,12 +47,12 @@ class Room:
         details on the get room details can be found in https://developer.webex.com/docs/api/v1/rooms/get-room-details 
         """
 
-        if room_id == None:
+        if room_id is None:
             sys.exit("'roomId' is a required field")
-        
-        url_route="rooms"
 
-        data = requests.get( self.URL+url_route+"/"+room_id, headers=self.headers )
+        url_route = "rooms"
+
+        data = requests.get(self.URL + url_route + "/" + room_id, headers=self.headers)
         return data
 
     def update_room_details(self, room_id=None, title=None):
@@ -63,19 +64,19 @@ class Room:
 
         if room_id is None:
             sys.exit("'roomId' is a required field")
-        
+
         elif title is None:
             sys.exit("'title' is a required field")
-        
+
         json = {
             "title": title
         }
 
         url_route = "rooms"
 
-        data = requests.put( self.URL + url_route + '/' + room_id,  json=json, headers=self.headers)
+        data = requests.put(self.URL + url_route + '/' + room_id, json=json, headers=self.headers)
         return data
-    
+
     def delete_room(self, room_id=None):
         """
         DELETES A ROOM with ID roomId
@@ -85,8 +86,7 @@ class Room:
 
         if room_id is None:
             sys.exit("'roomId' is a required field")
-        
-        url_route = "rooms"
-        data = requests.delete( self.URL + url_route + "/" +room_id, headers=self.headers )
-        return data
 
+        url_route = "rooms"
+        data = requests.delete(self.URL + url_route + "/" + room_id, headers=self.headers)
+        return data

@@ -1,6 +1,7 @@
 import requests
 import sys
 
+
 class Webhook:
 
     def get_all_webhooks(self):
@@ -11,11 +12,11 @@ class Webhook:
         """
 
         url_route = "webhooks"
-        
-        data = requests.get( self.URL + url_route, headers=self.headers)
+
+        data = requests.get(self.URL + url_route, headers=self.headers)
 
         return data
-    
+
     def create_webhook(self, name=None, target_url=None, resource=None, event=None):
         """
         Enables one to create a webhook that will be listening to events sent to the bot
@@ -25,32 +26,32 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if name == None:
+        if name is None:
             sys.exit("'name' is a required field")
-        
-        elif target_url == None:
+
+        elif target_url is None:
             sys.exit("'targetUrl' is a required field")
-        
-        elif resource == None:
+
+        elif resource is None:
             sys.exit("'resource' is a required field")
-        
-        elif event == None:
+
+        elif event is None:
             sys.exit("'event' is a required field")
-        
+
         # check for if a webhook with this URL already exists for this particular bot
         # cause apparently Cisco does not do that for us when creating webhooks. But tis all good :)
         existing_webhooks = self.get_all_webhooks().json()
         for webhook in existing_webhooks['items']:
             if webhook['targetUrl'] == target_url:
-                return self.get_webhook_details( webhook_id = webhook['id'])
+                return self.get_webhook_details(webhook_id=webhook['id'])
 
         json = {
             "name": name, "targetUrl": target_url, "resource": resource, "event": event
         }
 
-        data = requests.post( self.URL + url_route, headers=self.headers, json=json )
+        data = requests.post(self.URL + url_route, headers=self.headers, json=json)
         return data
-    
+
     def delete_webhook(self, webhook_id=None):
         """
         Deletes a webhook that has ID webhookId
@@ -60,12 +61,12 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if webhook_id == None:
+        if webhook_id is None:
             sys.exit("'webhookId' is a required field")
-        
-        data = requests.delete( self.URL + url_route + "/" + webhook_id, headers=self.headers )
+
+        data = requests.delete(self.URL + url_route + "/" + webhook_id, headers=self.headers)
         return data
-    
+
     def update_webhook(self, webhook_id=None, name=None, target_url=None):
         """
         'name' is the updated name of the webhook
@@ -78,22 +79,22 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if webhook_id == None:
+        if webhook_id is None:
             sys.exit("'webhookId' is a required field")
-        
-        elif name == None:
+
+        elif name is None:
             sys.exit("'name' is a required field")
-        
-        elif target_url == None:
+
+        elif target_url is None:
             sys.exit("'targetUrl' is a required field")
-        
+
         json = {
             "name": name, "targetUrl": target_url
         }
 
-        data = requests.put( self.URL + url_route + "/" + webhook_id, json=json, headers=self.headers )
+        data = requests.put(self.URL + url_route + "/" + webhook_id, json=json, headers=self.headers)
         return data
-    
+
     def get_webhook_details(self, webhook_id=None):
         """
         Get the details of a single webhook with id of webhookId
@@ -103,8 +104,8 @@ class Webhook:
 
         url_route = "webhooks"
 
-        if webhook_id == None:
+        if webhook_id is None:
             sys.exit("'webhookId' is a required field")
-        
-        data = requests.get( self.URL + url_route, headers=self.headers)
+
+        data = requests.get(self.URL + url_route, headers=self.headers)
         return data
