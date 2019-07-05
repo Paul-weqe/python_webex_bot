@@ -1,5 +1,4 @@
 import setuptools
-import os 
 
 required = None
 with open('requirements.txt') as f:
@@ -11,7 +10,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.56",
+    version="0.61",
     scripts=["python_webex_bot"],
     author="Paul-weqe",
     author_email="paul1tw1@gmail.com",

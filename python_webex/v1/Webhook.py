@@ -42,7 +42,7 @@ class Webhook:
         existing_webhooks = self.get_all_webhooks().json()
         for webhook in existing_webhooks['items']:
             if webhook['targetUrl'] == target_url:
-                return self.get_webhook_details( webhookId = webhook['id'])
+                return self.get_webhook_details( webhook_id = webhook['id'])
 
         json = {
             "name": name, "targetUrl": target_url, "resource": resource, "event": event
