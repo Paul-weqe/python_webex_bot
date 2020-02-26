@@ -9,4 +9,5 @@ runtime.txt
 */python_webex_bot.egg-info/*
 /dist/*
 /build/*
+test_script.py
 .gitignore
