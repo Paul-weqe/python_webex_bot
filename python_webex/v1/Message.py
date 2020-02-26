@@ -1,8 +1,9 @@
+from python_webex.v1.Card import Card
 import requests 
 import sys
 
 class Message:
-
+    
     # Message requests uses URL https://api.ciscospark.com/v1/messages
     
     def send_message(self, room_id=None, text=None, files=[]):
@@ -33,6 +34,27 @@ class Message:
         
         data = requests.post( self.URL + url_route, headers=self.headers, json=data )
         return data
+    
+    def send_card(self, card:Card,  room_id:str, markdown: str="[This is the default markdown title]"):
+        
+        message = {
+            "roomId": room_id,
+            "markdown": markdown,
+            "attachments": card.content
+        }
+        
+        url_route = "messages"
+        data = requests.post(self.URL + url_route, headers=self.headers, json=message)
+        return data
+    
+    def get_attachment_response(self, attachment_id: str):
+        """
+        Gets the details after a card that was sent has been filled and the response returned. 
+        """
+        url_route = "attachment/actions/{}".format(attachment_id)
+
+        response = requests.get(self.URL + url_route, headers=self.headers)
+        print(response.json())
 
     def get_messages(self, room_id=None):
         """

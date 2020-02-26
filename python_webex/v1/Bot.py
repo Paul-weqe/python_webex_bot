@@ -28,6 +28,11 @@ class Bot(People, Room, Webhook, Message):
         self.hears_to_function = {
 
         }
+
+        self.attachment_response_to_function = {
+
+        }
+
         self.attach_function = None
 
     """
@@ -38,4 +43,12 @@ class Bot(People, Room, Webhook, Message):
             self.hears_to_function[message_text] = f
 
         return hear_decorator
-
+    
+    """
+    decorator waiting for an attachment to be filled and returned for it to do a specific action
+    """
+    def attachment_response(self, message_id: str):
+        def response_decorator(f):
+            self.attachment_response_to_function[message_id] = f
+        
+        return response_decorator
