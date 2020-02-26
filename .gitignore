@@ -11,3 +11,4 @@ runtime.txt
 /build/*
 test_script.py
 .gitignore
+*.pyc

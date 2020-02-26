@@ -28,8 +28,10 @@ def index():
 def attachment_response():
     print(request)
     json_data = request.get_json()
-    print("**")
-    pprint(json_data)
-    print("**")
+    message_id = json_data['data']['messageId']
+    message_dict = bot.get_attachment_response(json_data['data']['id'])
+
+    response = bot.attachment_response_to_function[message_id](message_dict)
+    
 
     return "attachment response received"
