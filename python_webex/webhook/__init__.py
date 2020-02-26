@@ -1,4 +1,5 @@
 from flask import Flask, request
+from pprint import pprint
 
 app = Flask(__name__)
 bot = None
@@ -20,8 +21,15 @@ def index():
         
     elif message_info["text"].strip() != "" and  message_info[ "text" ] not in bot.hears_to_function:
         bot.hears_to_function[ "*" ]( room_id=message_info["roomId"] )
-    
+
     return "successfully responded"
 
+@app.route("/attachment-response", methods=["GET", "POST"])
+def attachment_response():
+    print(request)
+    json_data = request.get_json()
+    print("**")
+    pprint(json_data)
+    print("**")
 
-
+    return "attachment response received"

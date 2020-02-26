@@ -46,6 +46,15 @@ class Message:
         url_route = "messages"
         data = requests.post(self.URL + url_route, headers=self.headers, json=message)
         return data
+    
+    def get_attachment_response(self, attachment_id: str):
+        """
+        Gets the details after a card that was sent has been filled and the response returned. 
+        """
+        url_route = "attachment/actions/{}".format(attachment_id)
+
+        response = requests.get(self.URL + url_route, headers=self.headers)
+        print(response.json())
 
     def get_messages(self, room_id=None):
         """

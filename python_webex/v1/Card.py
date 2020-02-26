@@ -21,16 +21,12 @@ class Card:
                         "columns": [
                             {
                                 "type": "Column",
-                                "width": "auto",
+                                "width": 3,
                                 "items": []
                             }]
                     }
                 ],
                 "actions": [
-                    {
-                        "type": "Action.Submit",
-                        "title": "Submit"
-                    }
                 ]
             }
         }
@@ -38,6 +34,9 @@ class Card:
 
     def __add_element(self, element_dict):
         self.content[0]["content"]["body"][0]["columns"][0]["items"].append(element_dict)
+    
+    def __add_action(self, action_dict):
+        self.content[0]["content"]["actions"].append(action_dict)
     
     def get_all_input_ids(self):
         inputs = []
@@ -51,9 +50,6 @@ class Card:
         ids = self.get_all_input_ids()
         if id in ids:
             sys.exit("'id' {} is already amongst your IDs".format(id))
-    
-    
-
 
     """
     Textblock is essentially normal text in html. as how you would put a <p>Here is the text</p>
@@ -92,6 +88,19 @@ class Card:
         if input_placeholder is not None: element["placeholder"] = input_placeholder 
         if input_value is not None: element["value"] = input_value 
         self.__add_element(element)
+    
+    """
+    add_submit_btn() adds the button that submits the 'form' that has been sent as a message. Works like the <input type="submit"> element in html. 
+    """
+    def add_submit_action_btn(
+        self, title: str = "submit"
+    ):
+        action = {
+            "type": "Action.Submit",
+            "title": title
+        }
+        self.__add_action(action)
+
     
     """
     The various attribute values can be found at: https://adaptivecards.io/schemas/adaptive-card.json#/definitions/Input.ChoiceSet
