@@ -63,7 +63,7 @@ class Message:
         """
 
         if room_id == None:
-            sys.exit("'roomId' is a required field")
+            sys.exit("'room_id' is a required field")
         
         url_route = "messages"
 
@@ -80,7 +80,7 @@ class Message:
         """
         
         if person_id == None:
-            sys.exit("'personId' is a mandatory field")
+            sys.exit("'person_id' is a mandatory field")
 
         url_route = "messages"
 
@@ -98,7 +98,7 @@ class Message:
         """
 
         if message_id == None:
-            sys.exit("'messageId' is a required field")
+            sys.exit("'message_id' is a required field")
         
         url_route = "messages/" + message_id
 
@@ -112,7 +112,7 @@ class Message:
         """
 
         if message_id == None:
-            sys.exit("'messageId' is not a required field")
+            sys.exit("'message_id' is not a required field")
         
         url_route = "messages/" + message_id
 

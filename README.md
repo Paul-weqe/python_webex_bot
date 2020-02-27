@@ -138,4 +138,4 @@ Now, when we text our bot "hi", it will respond with "Hi, how are you doing?"
 And when we text anything else, like "When can we meet up?" it will respond with "Sorry, I could not understand that"
 
 
-<b><i>MORE DOCUMENTATION TO BE SETUP SHORTLY</i></b>
+<b><i>FIND MORE DOCUMENTATION <a href="https://python-webex-bot.readthedocs.io/en/latest/">here</a></i></b>
