@@ -48,8 +48,18 @@ class Card:
     
     def check_if_id_exists(self, id):
         ids = self.get_all_input_ids()
+        items = self.content[0]["content"]["body"][0]["columns"][0]["items"]
         if id in ids:
-            sys.exit("'id' {} is already amongst your IDs".format(id))
+            for item in items:
+                if item['id'] == id:
+                    items.remove(item)
+    
+    def check_if_submit_button_exists(self):
+        actions = self.content[0]["content"]["actions"]
+        for action in actions:
+            if action["type"] == "Action.Submit":
+                actions.remove(action)
+    
 
     """
     Textblock is essentially normal text in html. as how you would put a <p>Here is the text</p>
@@ -95,6 +105,7 @@ class Card:
     def add_submit_action_btn(
         self, title: str = "submit"
     ):
+        self.check_if_submit_button_exists()
         action = {
             "type": "Action.Submit",
             "title": title
