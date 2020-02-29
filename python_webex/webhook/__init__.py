@@ -26,12 +26,16 @@ def index():
 
 @app.route("/attachment-response", methods=["GET", "POST"])
 def attachment_response():
-    print(request)
+    
     json_data = request.get_json()
     message_id = json_data['data']['messageId']
     message_dict = bot.get_attachment_response(json_data['data']['id'])
 
-    response = bot.attachment_response_to_function[message_id](message_dict)
+    if message_id in bot.attachment_response_to_function:
+        response = bot.attachment_response_to_function[message_id](message_dict)
+    else:
+        room_id = message_dict['roomId']
+        bot.send_message(room_id=room_id, text='The form could not be submitted. You may need to request for the form again then submit. Sorry for the inconvenience :)')
     
 
     return "attachment response received"

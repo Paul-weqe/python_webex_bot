@@ -54,7 +54,7 @@ class Message:
         url_route = "attachment/actions/{}".format(attachment_id)
 
         response = requests.get(self.URL + url_route, headers=self.headers)
-        print(response.json())
+        return response.json()
 
     def get_messages(self, room_id=None):
         """

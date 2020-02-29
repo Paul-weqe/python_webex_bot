@@ -10,11 +10,11 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.71",
+    version="0.72",
     scripts=["python_webex_bot"],
     author="Paul-weqe",
     author_email="paul1tw1@gmail.com",
-    description="In this version, we enable the pre installation of other python packages",
+    description="In this version, there is the clearing up of issues present in the response to card forms that were in the previous version",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Paul-weqe/python_webex_bot",
