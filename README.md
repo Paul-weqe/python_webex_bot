@@ -1,6 +1,13 @@
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/Paul-weqe/python_webex_bot)
 [![PyPI version](https://badge.fury.io/py/python-webex-bot.svg)](https://badge.fury.io/py/python-webex-bot)
 
+[Official Documentation](https://python-webex-bot.readthedocs.io/en/latest/)
+
+[Installation and Quickstart](https://python-webex-bot.readthedocs.io/en/latest/) <br>
+[Rooms](https://python-webex-bot.readthedocs.io/en/latest/docs/rooms/) <br>
+[Messages](https://python-webex-bot.readthedocs.io/en/latest/docs/messages/) <br>
+[Cards](https://python-webex-bot.readthedocs.io/en/latest/docs/cards/) <br>
+
 # python_webex_bot
 
 A python3 library meant to help you create a cisco webex teams bot and take advantage of some of the features available to these bots. 
