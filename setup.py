@@ -10,11 +10,11 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.73",
+    version="0.74",
     scripts=["python_webex_bot"],
     author="Paul-weqe",
     author_email="paul1tw1@gmail.com",
-    description="Imrovement of the ID selection from the Card class",
+    description="Introducing detection of incoming file submissions",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Paul-weqe/python_webex_bot",
