@@ -2,4 +2,6 @@ site_name: Python-Webex-Bot
 
 
 nav:
-    - Introduction: 'docs/index.md'
+    - Rooms: rooms.md
+    - Messages: messages.md
+    - Cards: cards.md
