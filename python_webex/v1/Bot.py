@@ -58,7 +58,7 @@ class Bot(People, Room, Webhook, Message):
     """
     decorator waiting for any attachment that has been sent to the bot
     """
-    def set_default_file_attachment(self):
+    def set_default_file_response(self):
         def hear_default_file_attachment(f):
             self.default_attachment = f
         return hear_default_file_attachment

@@ -5,3 +5,6 @@ nav:
     - Rooms: rooms.md
     - Messages: messages.md
     - Cards: cards.md
+
+theme:
+    include_sidebar: true

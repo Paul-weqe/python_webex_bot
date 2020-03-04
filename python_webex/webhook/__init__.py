@@ -18,7 +18,6 @@ def index():
     if 'files' in message_info:
         if 'text' in message_info:
             if message_info['text'] in bot.hears_file_to_function:
-                print(True)
                 message_text = message_info['text']
                 files = message_info['files']
                 bot.hears_file_to_function[message_text](files=message_info['files'], room_id=message_info['roomId'])
