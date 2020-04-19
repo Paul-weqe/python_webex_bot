@@ -8,29 +8,30 @@ They can allow us to create form like interactive interfaces from the bot.
 """
 
 class Card:
-    content = [
-        {
-            "contentType": "application/vnd.microsoft.card.adaptive",
-            "content": {
-                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                "type": "AdaptiveCard",
-                "version": "1.0",
-                "body": [
-                    {
-                        "type": "ColumnSet",
-                        "columns": [
-                            {
-                                "type": "Column",
-                                "width": 3,
-                                "items": []
-                            }]
-                    }
-                ],
-                "actions": [
-                ]
+    def __init__(self):
+        self.content = [
+            {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.0",
+                    "body": [
+                        {
+                            "type": "ColumnSet",
+                            "columns": [
+                                {
+                                    "type": "Column",
+                                    "width": 3,
+                                    "items": []
+                                }]
+                        }
+                    ],
+                    "actions": [
+                    ]
+                }
             }
-        }
-    ]
+        ]
 
     def __add_element(self, element_dict):
         self.content[0]["content"]["body"][0]["columns"][0]["items"].append(element_dict)
