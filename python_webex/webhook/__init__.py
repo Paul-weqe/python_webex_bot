@@ -8,7 +8,6 @@ bot = None
 def index():
 
     json_data = request.get_json()
-    
     message_id = json_data[ "data" ][ "id" ]
     message_info = bot.get_message_details( message_id=message_id ).json()
 
