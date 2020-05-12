@@ -101,7 +101,7 @@ class Card:
         self.__add_element(element)
     
     """
-    add_submit_btn() adds the button that submits the 'form' that has been sent as a message. Works like the <input type="submit"> element in html. 
+    add_submit_action_btn() adds the button that submits the 'form' that has been sent as a message. Works like the <input type="submit"> element in html. 
     """
     def add_submit_action_btn(
         self, title: str = "submit"
@@ -121,6 +121,9 @@ class Card:
         self, input_id: str, input_choices:list=[], input_is_multiselect: bool = False, input_value:str = None
     ):
         self.check_if_id_exists(input_id)
+        print("*" * 70)
+        print(input_choices)
+        print("*" * 70)
         element = {
             "id": input_id,
             "type": "Input.ChoiceSet",
@@ -130,4 +133,3 @@ class Card:
 
         if input_value is not None: element["value"] = input_value
         self.__add_element(element)
-

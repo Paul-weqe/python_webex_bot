@@ -3,16 +3,24 @@ import requests
 import sys
 
 class Message:
-    
-    # Message requests uses URL https://api.ciscospark.com/v1/messages
+    """
+    Message requests uses URL https://api.ciscospark.com/v1/messages
+
+    Enables us to interact with the Messages in the Cisco Webex platform. 
+    sending messages, listing your messages etc.  
+    """
     
     def send_message(self, room_id=None, text=None, files=[]):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
-        'files' is a list of the files(images, audios etc) you want to send to the user
+        'files' is a list of the files(images, audios etc) you want to send to the user, if the user wants to attach files with the message
+        
+        Arguments:
+		    room_id => This is a 
+		    text => The text being sent in the message 
+            files => A list of files you want to sell. Each element in the list is a directory path to the file. e.g files=['/this/is/my/path/this_image.jpg', 'this/is/my/second/path/this_pdf.pdf']
         """
-
         if room_id == None:
             sys.exit("'roomId' is a required field")
         
@@ -36,6 +44,11 @@ class Message:
         return data
     
     def send_card(self, card:Card,  room_id:str, markdown: str="[This is the default markdown title]"):
+        """
+		Cars are elements that can hold forms and improve interactivity of the messages. 
+        For example, if you are using a bot to monitor your networking devices, this will require you to login the networking devices first. 
+        You can send a form for one to login to the networking devices. 
+        """
         
         message = {
             "roomId": room_id,
@@ -49,7 +62,7 @@ class Message:
     
     def get_attachment_response(self, attachment_id: str):
         """
-        Gets the details after a card that was sent has been filled and the response returned. 
+        Gets the response for when an attachment has been sent
         """
         url_route = "attachment/actions/{}".format(attachment_id)
 
