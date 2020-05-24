@@ -1,5 +1,6 @@
 from flask import Flask, request
 from pprint import pprint
+import inspect
 
 app = Flask(__name__)
 bot = None
@@ -12,28 +13,56 @@ def index():
     if message_info[ "personId" ] == bot.get_own_details().json()[ 'id' ]:
         return "cannot respond to my own messages"
     
+
     if 'files' in message_info:
         if 'text' in message_info:
             if message_info['text'] in bot.hears_file_to_function:
                 message_text = message_info['text']
                 files = message_info['files']
-                bot.hears_file_to_function[message_text](files=message_info['files'], room_id=message_info['roomId'])
+
+                if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+                    bot.hears_file_to_function[message_text](files=message_info['files'], room_id=message_info['roomId'], message_info=message_info)
+                else:
+                    bot.hears_file_to_function[message_text](files=message_info['files'], room_id=message_info['roomId'])
+
                 return "Works"
             elif '*' in bot.hears_file_to_function:
-                bot.hears_file_to_function['*'](files=message_info['files'], room_id=message_info['roomId'])
-                return "Defatult file action"
+
+                if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+                    bot.hears_file_to_function['*'](files=message_info['files'], room_id=message_info['roomId'], message_info=message_info)
+                else:
+                    bot.hears_file_to_function['*'](files=message_info['files'], room_id=message_info['roomId'])
+
+                return "Default file action"
             else:
                 print("Default response for file sent with text not set")
+
         elif bot.default_attachment is not None:
-            bot.default_attachment(files=message_info['files'], room_id=message_info['roomId'])
+            if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+                bot.default_attachment(files=message_info['files'], room_id=message_info['roomId'], message_info=message_info)
+            else:
+                bot.default_attachment(files=message_info['files'], room_id=message_info['roomId'])
             return "Works"
         else:
             print("No action set for receiving the file with text '{}'".format( message_info['text'] ))
+
     elif message_info[ "text" ].strip() != "" and message_info[ "text" ] in bot.hears_to_function:
         message_text = message_info[ "text" ]
-        bot.hears_to_function[ message_text ]( room_id=message_info["roomId"] )
+        # bot.hears_to_function[ message_text ](room_id=message_info["roomId"])
+        
+        if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+            bot.hears_to_function[ message_text ](room_id=message_info["roomId"], message_info=message_info)
+        else:
+            bot.hears_to_function[ message_text ](room_id=message_info["roomId"])
+        
+
     elif message_info["text"].strip() != "" and  message_info[ "text" ] not in bot.hears_to_function:
-        bot.hears_to_function[ "*" ]( room_id=message_info["roomId"] )
+        
+        if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+            bot.hears_to_function[ "*" ]( room_id=message_info["roomId"], message_info=message_info)
+        else:
+            bot.hears_to_function[ "*" ]( room_id=message_info["roomId"])
+        
     return "successfully responded"
 
 
