@@ -12,3 +12,4 @@ runtime.txt
 test_script.py
 .gitignore
 *.pyc
+upgrade_version.sh
