@@ -16,8 +16,9 @@ def index():
 
     if 'files' in message_info:
         if 'text' in message_info:
+            message_text = message_info['text']
+
             if message_info['text'] in bot.hears_file_to_function:
-                message_text = message_info['text']
                 files = message_info['files']
 
                 if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
@@ -57,11 +58,12 @@ def index():
         
 
     elif message_info["text"].strip() != "" and  message_info[ "text" ] not in bot.hears_to_function:
-        
-        if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+#        if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+        if 'message_info' in bot.hears_to_function["*"].__code__.co_varnames:
             bot.hears_to_function[ "*" ]( room_id=message_info["roomId"], message_info=message_info)
         else:
             bot.hears_to_function[ "*" ]( room_id=message_info["roomId"])
+        
         
     return "successfully responded"
 
