@@ -16,8 +16,9 @@ def index():
 
     if 'files' in message_info:
         if 'text' in message_info:
+            message_text = message_info['text']
+
             if message_info['text'] in bot.hears_file_to_function:
-                message_text = message_info['text']
                 files = message_info['files']
 
                 if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
@@ -26,9 +27,9 @@ def index():
                     bot.hears_file_to_function[message_text](files=message_info['files'], room_id=message_info['roomId'])
 
                 return "Works"
-            elif '*' in bot.hears_file_to_function:
 
-                if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+            elif '*' in bot.hears_file_to_function:
+                if 'message_info' in bot.hears_to_function["*"].__code__.co_varnames:
                     bot.hears_file_to_function['*'](files=message_info['files'], room_id=message_info['roomId'], message_info=message_info)
                 else:
                     bot.hears_file_to_function['*'](files=message_info['files'], room_id=message_info['roomId'])
@@ -38,18 +39,17 @@ def index():
                 print("Default response for file sent with text not set")
 
         elif bot.default_attachment is not None:
-            if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+
+            if 'message_info' in bot.default_attachment.__code__.co_varnames:
                 bot.default_attachment(files=message_info['files'], room_id=message_info['roomId'], message_info=message_info)
             else:
                 bot.default_attachment(files=message_info['files'], room_id=message_info['roomId'])
             return "Works"
         else:
-            print("No action set for receiving the file with text '{}'".format( message_info['text'] ))
+            print("No action set for receiving the file")
 
     elif message_info[ "text" ].strip() != "" and message_info[ "text" ] in bot.hears_to_function:
         message_text = message_info[ "text" ]
-        # bot.hears_to_function[ message_text ](room_id=message_info["roomId"])
-        
         if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
             bot.hears_to_function[ message_text ](room_id=message_info["roomId"], message_info=message_info)
         else:
@@ -57,11 +57,12 @@ def index():
         
 
     elif message_info["text"].strip() != "" and  message_info[ "text" ] not in bot.hears_to_function:
-        
-        if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+#        if 'message_info' in bot.hears_to_function[message_text].__code__.co_varnames:
+        if 'message_info' in bot.hears_to_function["*"].__code__.co_varnames:
             bot.hears_to_function[ "*" ]( room_id=message_info["roomId"], message_info=message_info)
         else:
             bot.hears_to_function[ "*" ]( room_id=message_info["roomId"])
+        
         
     return "successfully responded"
 
