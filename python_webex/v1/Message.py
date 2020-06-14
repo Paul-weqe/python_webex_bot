@@ -16,10 +16,12 @@ class Message:
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
         'files' is a list of the files(images, audios etc) you want to send to the user, if the user wants to attach files with the message
         
-        Arguments:
-		    room_id => This is a 
-		    text => The text being sent in the message 
-            files => A list of files you want to sell. Each element in the list is a directory path to the file. e.g files=['/this/is/my/path/this_image.jpg', 'this/is/my/second/path/this_pdf.pdf']
+        ----
+        Arguments
+        @ room_id: string => This is the ID of the room you are sending the message to 
+        @ text: string => The text being sent in the message 
+        @ files: list of string =>  A list of files you want to sell. Each element in the list is a directory path to the file.
+                                    e.g files=['/this/is/my/path/this_image.jpg', 'this/is/my/second/path/this_pdf.pdf']
         """
         if room_id == None:
             sys.exit("'roomId' is a required field")

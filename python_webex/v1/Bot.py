@@ -9,14 +9,22 @@ import sys
 
 class Bot(People, Room, Webhook, Message):
 
-    def __init__(self):
+    def __init__(self, auth_token=None):
 
         # declare headers and how the token will be gotten from the system
         self.URL = "https://api.ciscospark.com/"
-        self.auth_token = os.getenv("auth_token")
+
+        # looks for if the auth_token has been set in the initializer. 
+        # If not, goes looks for the `auth_token` environment variable
+        self.auth_token = auth_token if auth_token else os.getenv("auth_token")
+
 
         if self.auth_token == None:
-            sys.exit("'auth_token' not set in the environment variables")
+            print("The auth_token needs to be specified for us to identify the bot being specified.")
+            print("This can be done through: ")
+            print("    1. specifying in the intiializer. Bot('auth_token')")
+            print("    2. specifying in your environment vairiables. How environment variables are defined depends on your OS")
+            sys.exit()
         
         self.headers = {
             "Authorization": "Bearer " + self.auth_token,
@@ -37,7 +45,8 @@ class Bot(People, Room, Webhook, Message):
 
         }
 
-        # default attachment variable will hold the function that is supposed to be the default action whenever an attachment is sent to the bot
+        # default attachment variable will hold the function that is supposed to be the 
+        # default action whenever an attachment is sent to the bot
         self.default_attachment = None
 
         # maps what will happen when a file is received with a particular type of text
