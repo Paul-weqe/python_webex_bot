@@ -10,12 +10,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.85",
+    version="0.851",
 
     scripts=["python_webex_bot"],
     author="Paul-weqe",
     author_email="paul1tw1@gmail.com",
-    description="Remove unused dependencies from requirements.txt",
+    description="Add auth_token in initializer",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Paul-weqe/python_webex_bot",
