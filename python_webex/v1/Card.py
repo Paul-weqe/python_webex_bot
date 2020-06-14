@@ -121,9 +121,6 @@ class Card:
         self, input_id: str, input_choices:list=[], input_is_multiselect: bool = False, input_value:str = None
     ):
         self.check_if_id_exists(input_id)
-        print("*" * 70)
-        print(input_choices)
-        print("*" * 70)
         element = {
             "id": input_id,
             "type": "Input.ChoiceSet",
