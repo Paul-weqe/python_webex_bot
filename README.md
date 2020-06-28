@@ -107,7 +107,7 @@ Create a python file where you intend to run the bot. In my case, I will name my
 
 copy and paste the following code:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from python_webex import webhook
 
