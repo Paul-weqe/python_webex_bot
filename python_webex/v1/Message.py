@@ -61,6 +61,7 @@ class Message:
 
         @ markdown: str => string with markdown information. For formatting information, we should 
             use https://dev-preview.webex.com/formatting-messages.html
+        
         """
         if room_id == None:
             sys.exit("'room_id' is a requierd field")
@@ -74,7 +75,7 @@ class Message:
             "roomId": room_id,
             "markdown": markdown
         }
-        
+                
         data = requests.post( self.URL + url_route, headers = self.headers, json=data )
         return data
     
