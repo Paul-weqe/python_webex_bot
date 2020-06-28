@@ -53,13 +53,7 @@ class MessageReceivingHandler:
         
         elif self.bot.default_attachment is not None:
             self.handle_messages_with_files_and_without_text_and_with_default_attachment_set()
-
-        # elif "*" in self.bot.hears_file_to_function:
-        #     self.handle_messages_without_file_and_with_text()
-
-        # elif self.bot.default_attachment is not None:
-        #     pass
-
+            
         else:
             self.handle_messages_without_file_and_without_text()
 
@@ -103,13 +97,6 @@ class MessageReceivingHandler:
 
         else:
             return "Default response for file sent with text not set"
-        # else:
-        #     self.bot.hears_file_to_function[message_text](
-        #         files = self.message_info['files'], 
-        #         room_id = self.message_info['roomId']
-        #     )
-        #     return "message with text and no functionality for the text successfully handled. "
-
 
     def handle_messages_without_file_and_with_text(self):
         message_text = self.message_info["text"]

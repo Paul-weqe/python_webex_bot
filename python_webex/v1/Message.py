@@ -24,7 +24,7 @@ class Message:
                                     e.g files=['/this/is/my/path/this_image.jpg', 'this/is/my/second/path/this_pdf.pdf']
         """
         if room_id == None:
-            sys.exit("'roomId' is a required field")
+            sys.exit("'room_id' is a required field")
         
         if text == None:
             sys.exit("'text' is a required field")
@@ -43,6 +43,42 @@ class Message:
             data["files"] = files
         
         data = requests.post( self.URL + url_route, headers=self.headers, json=data )
+        return data
+
+    """
+    Message requests uses URL https://api.ciscospark.com/v1/messages
+
+    Enables sending of markdown data such as lists, links, code formatted messages etc
+    """
+    def send_markdown(self, room_id=None, text=None, markdown=None):
+        """
+        ----
+        Arguments
+
+        @ room_id: str => ID of the room where the markdown is being sent to 
+        @ text: str => text to be sent to the user. This will be shown without a markdown in case 
+            the client device does not support rich text
+
+        @ markdown: str => string with markdown information. For formatting information, we should 
+            use https://dev-preview.webex.com/formatting-messages.html
+        """
+        if room_id == None:
+            sys.exit("'room_id' is a requierd field")
+        
+        if markdown == None:
+            sys.exit("'markdown' is a required field")
+        
+        url_route = "messages"
+
+        if text == None: text = ""
+
+        data = {
+            "roomId": room_id,
+            "markdown": markdown,
+            "text": text
+        }
+        
+        data = requests.post( self.URL + url_route, headers = self.headers, json=data )
         return data
     
     def send_card(self, card:Card,  room_id:str, markdown: str="[This is the default markdown title]"):
