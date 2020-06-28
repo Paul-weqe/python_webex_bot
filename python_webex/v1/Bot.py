@@ -56,6 +56,7 @@ class Bot(People, Room, Webhook, Message):
 
         self.attach_function = None
 
+
     """
     decorator meant to do a specific action when called
     """
