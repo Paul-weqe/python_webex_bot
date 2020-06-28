@@ -50,7 +50,7 @@ class Message:
 
     Enables sending of markdown data such as lists, links, code formatted messages etc
     """
-    def send_markdown(self, room_id=None, text=None, markdown=None):
+    def send_markdown(self, room_id=None, markdown=None):
         """
         ----
         Arguments
@@ -70,12 +70,9 @@ class Message:
         
         url_route = "messages"
 
-        if text == None: text = ""
-
         data = {
             "roomId": room_id,
-            "markdown": markdown,
-            "text": text
+            "markdown": markdown
         }
         
         data = requests.post( self.URL + url_route, headers = self.headers, json=data )
