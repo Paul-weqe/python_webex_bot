@@ -12,7 +12,7 @@ class Bot(People, Room, Webhook, Message):
     def __init__(self, auth_token=None):
 
         # declare headers and how the token will be gotten from the system
-        self.URL = "https://api.ciscospark.com/v1/"
+        self.URL = "https://webexapis.com/v1/"
 
         # looks for if the auth_token has been set in the initializer. 
         # If not, goes looks for the `auth_token` environment variable
