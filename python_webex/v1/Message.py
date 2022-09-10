@@ -10,7 +10,7 @@ class Message:
     sending messages, listing your messages etc.  
     """
     
-    def send_message(self, room_id=None, text=None, files=[]):
+    def send_message(self, to_person_email=None, room_id=None, text=None, files=[]):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
@@ -23,8 +23,8 @@ class Message:
         @ files: list of string =>  A list of files you want to sell. Each element in the list is a directory path to the file.
                                     e.g files=['/this/is/my/path/this_image.jpg', 'this/is/my/second/path/this_pdf.pdf']
         """
-        if room_id == None:
-            sys.exit("'room_id' is a required field")
+        if room_id == None and to_person_email == None:
+            sys.exit("either 'room_id', 'person_email' or 'toPersonId' must be present")
         
         if text == None:
             sys.exit("'text' is a required field")
@@ -35,10 +35,15 @@ class Message:
         url_route = "messages"
 
         data = {
-            "roomId": room_id,
             "text": text,
         }
 
+        # specify receiver of the message
+        if room_id is not None:
+            data["roomId"] = room_id
+        elif to_person_email is not None:
+            data["toPersonEmail"] = to_person_email
+        
         if len(files) > 0:
             data["files"] = files
         

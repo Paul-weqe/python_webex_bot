@@ -7,13 +7,18 @@
 
 Want to send a message from your bot to a specific room? No worries, here is how:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 
 bot = Bot()
 
-bot.send_message(room_id='room-id', text='This is some text')
+bot.send_message(to_person_email='person-email@gmail.com', text='This is some text')
+# or
+bot.send_message(room_id='someroomid', text='This is the text')
+
+# you can use either `room_id` will be given priority over `to_person_email` when both are used at the same time. 
 ```
+
 
 ## Attach files with message
 <span style="color: orange;">*Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.*</span>
