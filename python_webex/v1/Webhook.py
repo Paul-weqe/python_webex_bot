@@ -1,7 +1,6 @@
 import requests
 import sys
 
-
 class Webhook:
 
     def get_all_webhooks(self):

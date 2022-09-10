@@ -1,6 +1,5 @@
 from python_webex.webhook.handlers import MessageReceivingHandler, AttachmentReceivingHandler 
 from flask import Flask, request
-import inspect
 
 
 app = Flask(__name__)
