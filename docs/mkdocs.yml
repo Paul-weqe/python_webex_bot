@@ -8,3 +8,4 @@ nav:
 
 theme:
     include_sidebar: true
+    name: readthedocs
