@@ -15,8 +15,9 @@ class Bot(People, Room, Webhook, Message):
         self.URL = "https://webexapis.com/v1/"
 
         # looks for if the auth_token has been set in the initializer. 
-        # If not, goes looks for the `auth_token` environment variable
+        # If not, goes looks for the `auth_token` or `AUTH_TOKEN` environment variable
         self.auth_token = auth_token if auth_token else os.getenv("auth_token")
+        self.auth_token = self.auth_token if self.auth_token else os.getenv("AUTH_TOKEN")
 
 
         if self.auth_token == None:

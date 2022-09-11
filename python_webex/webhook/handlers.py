@@ -41,10 +41,12 @@ class MessageReceivingHandler:
         elif self.message_info["text"].strip() != "" and  self.message_info[ "text" ] not in self.bot.hears_to_function:
             self.handle_messages_without_file_and_without_text()
             return None
+    
 
-    # function handles when messages are sent with file attachments (images, documents etc)
     def handle_messages_with_files(self):
-        
+        """
+        function handles when messages are sent with file attachments (images, documents etc)
+        """    
         # loop for when the file attached(image, document..etc) is sent with a text accomanied. 
         # for example, if an image is sent with caption "Felt cure, might delete later"
         # this is considered a file attachment with a text alongside
@@ -56,7 +58,7 @@ class MessageReceivingHandler:
             
         else:
             self.handle_messages_without_file_and_without_text()
-
+    
     def handle_messages_with_file_and_text(self):
         message_text = self.message_info["text"]
 
