@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Messages - Python-Webex-Bot</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Messages";
+        var mkdocs_page_input_path = "messages.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Python-Webex-Bot
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../rooms/">Rooms</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Messages</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#create-message">Create Message</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#attach-files-with-message">Attach files with message</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#send-message-with-markdown">Send message with  Markdown</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-messages">Get messages</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-direct-messages">Get Direct Messages</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-message-details">Get Message Details</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delete-message">Delete Message</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setup-webhook-for-incoming-messages">Setup Webhook for incoming messages</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#set-default-action-for-incoming-message">Set default action for incoming message</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#set-default-listener-for-incoming-files">Set default listener for incoming files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#set-listener-for-specific-text-attached-with-file">Set listener for specific text attached with file</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../cards/">Cards</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Python-Webex-Bot</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Messages</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="messages">Messages</h1>
+<h2 id="create-message">Create Message</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Want to send a message from your bot to a specific room? No worries, here is how:</p>
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+bot.send_message(to_person_email='person-email@gmail.com', text='This is some text')
+# or
+bot.send_message(room_id='someroomid', text='This is the text')
+
+# you can use either `room_id` will be given priority over `to_person_email` when both are used at the same time. 
+</code></pre>
+<h2 id="attach-files-with-message">Attach files with message</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>To attach a files when sending a message, do this:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+bot.send_message(room_id='room-id', text='I am sending a file', files=['https://image.shutterstock.com/image-photo/white-transparent-leaf-on-mirror-260nw-1029171697.jpg'])
+</code></pre>
+<p><span style="color:red;"><b>Note</b> the <i>files</i> parameter may be a list, but only one field is allowed. Why Exactly? No Idea, ask Webex. And also you can only keep URI's on the files field and not a path to a file in a local directory. <span></p>
+<h2 id="send-message-with-markdown">Send message with  Markdown</h2>
+<p><span style="color: orange"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>When we want to style our messages e.g using bold, italivs and so on, we can use markups. Have a look <a href="https://www.markdownguide.org/">here</a> to read more about how markups work. </p>
+<p>So, this is how we can send a markup:</p>
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+markdown = &quot;&quot;&quot;
+*This is italic*\n
+**This is bold**\n
+`This looks like code`
+&quot;&quot;&quot;
+bot.send_message(
+    to_person_email=&quot;some-email@gmail.com&quot;, markdown = markdown
+)
+</code></pre>
+<h2 id="get-messages">Get messages</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>This lists all the messages that have been received by the bot on a specific room.</p>
+<p>This is how we can get these details:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+from pprint import pprint
+
+bot = Bot()
+
+pprint(bot.get_messages(room_id=&quot;room-id&quot;).json())
+</code></pre>
+<h2 id="get-direct-messages">Get Direct Messages</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Gets a list of all messages sent in 1:1 rooms. This is basically a list of all the bot's DMs with a particular individual, done by providing the person's ID.</p>
+<p>This is how this is done:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+from pprint import pprint
+
+bot = Bot()
+
+pprint(bot.get_direct_messages(person_id=&quot;person-id&quot;).json())
+</code></pre>
+<h2 id="get-message-details">Get Message Details</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Gives you details about a specific message with ID <b><i>message-id</i></b></p>
+<pre><code>from python_webex.v1.Bot import Bot
+from pprint import pprint
+
+bot = Bot()
+
+pprin(bot.get_message_details(message_id=&quot;message-id&quot;).json())
+</code></pre>
+<h2 id="delete-message">Delete Message</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Deletes a specific message with ID <b><i>message-id</i></b></p>
+<pre><code>from python_webex.v1.Bot import Bot
+from pprint import pprint
+
+bot = Bot()
+
+bot.delete_message(message_id='message-id')
+</code></pre>
+<h2 id="setup-webhook-for-incoming-messages">Setup Webhook for incoming messages</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>If your bot need to be constantly listening for incoming messages, you need to set up a webhook. To set up a webhook, you need an address that is available via the public internet. You can use <a href="https://ngrok.com/">ngrok</a> for this. </p>
+<p>If you have ngrok downloaded, type <code>./ngrok http 5000</code> if you are on <i>Linux</i>. Otherwise, type <code>ngrok.exe http 5000</code> if you are on <i>Windows</i>. This will give you an output as such:</p>
+<pre><code>Session Expires               7 hours, 6 minutes                                
+Version                       2.3.35                                            
+Region                        United States (us)                                
+Web Interface                 http://127.0.0.1:4040                             
+Forwarding                    http://cff51342.ngrok.io -&gt; http://localhost:5000 
+Forwarding                    https://cff51342.ngrok.io -&gt; http://localhost:5000
+</code></pre>
+<p>Now, you can open up your text editor and type in the following:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+from python_webex import webhook
+
+bot = Bot()
+bot.create_webhook(
+    name='some-normal-webhook', target_url='https://cff51342.ngrok.io', resource='messages', event='created'
+)
+
+webhook.bot = bot
+
+if __name__ == &quot;__main__&quot;:
+    webhook.app.run(debug=True)
+</code></pre>
+<p>You willl now be constantly listening for any incoming message via the message that has been sent to the bot. </p>
+<h2 id="set-default-action-for-incoming-message">Set default action for incoming message</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples 
+on this tutorial.</em></span></p>
+<p>When you receive a message, it normally comes with text. The following is how to set a default response whatever text is sent to the bot:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+@bot.on_hears(&quot;*&quot;)
+def default_on_hears_function(room_id=None):
+    bot.send_message(room_id=room_id, text=&quot;This is the default response for the message that has been sent&quot;)
+</code></pre>
+<h2 id="set-default-listener-for-incoming-files">Set default listener for incoming files</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples 
+on this tutorial.</em></span></p>
+<p>You want your bot to receive files? So do many other people. </p>
+<p>We need to have a way to handle how these files are received and handled. So here is how we set the default function for handling incoming files:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+from python_webex import webhook
+
+bot = Bot()
+
+@bot.set_default_file_response()
+def default_file_response(files, room_id=None):
+    bot.send_message(room_id=room_id, text='this is the default response for an attached file')
+
+webhook.bot = bot
+
+if __name__ == &quot;__main__&quot;:
+    webhook.app.run(debug=True)
+
+</code></pre>
+<p>If you need to attach anything in the response, refer to the previous tutorial about attaching files with messages</p>
+<h2 id="set-listener-for-specific-text-attached-with-file">Set listener for specific text attached with file</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples 
+on this tutorial.</em></span></p>
+<p>What do you do when someone send you a file attached with a specific set of text, and you do know what you need your bot to do at this point:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+from python_webex import webhook
+
+bot = Bot()
+
+@bot.set_file_action(&quot;This is me&quot;)
+def custom_response(room_id=None, files=None):
+    print(files)
+    bot.send_message(room_id=room_id, text=&quot;You look amazing&quot;)
+
+webhook.bot = bot
+
+if __name__ == &quot;__main__&quot;:
+    webhook.app.run(debug=True)
+
+</code></pre>
+<p>In <code>def custom_response(room_id=None, files=None):</code>, files represent a list of the files being sent to the bot. </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../rooms/" class="btn btn-neutral float-left" title="Rooms"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cards/" class="btn btn-neutral float-right" title="Cards">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../rooms/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../cards/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

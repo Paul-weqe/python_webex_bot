@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Rooms - Python-Webex-Bot</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Rooms";
+        var mkdocs_page_input_path = "rooms.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Python-Webex-Bot
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Rooms</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#get-all-rooms">Get all rooms</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-room-details">Get room details</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-room">Create Room</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#update-room-details">Update Room Details</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delete-a-room">Delete a room</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../messages/">Messages</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../cards/">Cards</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Python-Webex-Bot</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Rooms</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="rooms">Rooms</h1>
+<h2 id="get-all-rooms">Get all rooms</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on here.</em></span></p>
+<p>What we are aiming to do here is to get all the rooms that the bot is currently in. All from group rooms to individual rooms, we get all the details. Let us look at what we have to do:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+all_rooms_response = bot.get_all_rooms()
+
+all_rooms = all_rooms_response.json()
+
+print(all_rooms)
+
+</code></pre>
+<p>If everything works out fine you should see the following output:</p>
+<pre><code>{
+    'items': [
+        {
+            'title': 'room-title', 
+            'ownerId': 'consumer', 
+            'id': 'room-id', 
+            'teamId': 'team-id', # this will show if it is a group room
+            'lastActivity': '2019-03-29T07:36:12.214Z', 
+            'created': '2019-03-29T07:34:21.521Z', 
+            'isLocked': False, 
+            'creatorId': 'creator-id', 
+            'type': 'group'
+        }
+    ]
+}
+</code></pre>
+<h2 id="get-room-details">Get room details</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>This gets the details of a specific room, we can use the output from <a href="#get-all-rooms">here</a> and get a single rooms ID. We will call the room ID <em>room_id</em></p>
+<p>We will use this <em>room_id</em> to get the details of that specific room, here is how:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+room_id = 'someroomid'
+
+room_details_response = bot.get_room_details(room_id=room_id)
+
+room_details = room_details_response.json()
+
+print(room_details)
+
+</code></pre>
+<p>You should see an output similar to this: </p>
+<pre><code>{
+    'creatorId': 'creator-id', 
+    'lastActivity': '2019-03-29T07:36:12.214Z', 
+    'id': 'room-id', 
+    'title': 'Discussion', 
+    'created': '2019-03-29T07:34:21.521Z', 
+    'type': 'group', 
+    'ownerId': 'consumer', 
+    'isLocked': False, 
+    'teamId': 'team-id' # if the room is a team
+}
+
+</code></pre>
+<p>Use this information wisely. </p>
+<h2 id="create-room">Create Room</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Some of the functionality for creating a room is still being worked on, bear with us. </p>
+<p>The following should work for creating a room:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+bot.create_room(title=&quot;Bot's room with best friend&quot;, team_id=&quot;team-id&quot;, room_type=&quot;something either 'direct' or 'group'&quot;)
+</code></pre>
+<h2 id="update-room-details">Update Room Details</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Currently, we can only edit the title of a room. To do so, run the following script:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+room_id = 'room-id'
+
+bot.update_room_details(room_id=room_id, title='New Title')
+</code></pre>
+<h2 id="delete-a-room">Delete a room</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Let us wreck some havock and delete a room. </p>
+<p>This can be done through:</p>
+<pre><code>from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+room_id = 'room-id'
+
+bot.delete_room(room_id=room_id)
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../messages/" class="btn btn-neutral float-right" title="Messages">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="../messages/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

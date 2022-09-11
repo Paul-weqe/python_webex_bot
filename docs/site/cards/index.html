@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Cards - Python-Webex-Bot</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Cards";
+        var mkdocs_page_input_path = "cards.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Python-Webex-Bot
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../rooms/">Rooms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../messages/">Messages</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Cards</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#create-send-blank-card">Create &amp; Send Blank Card</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#add-text-items-on-the-card">Add text items on the card</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-card-webhook">Create Card Webhook</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listen-for-response-on-card">Listen for response on card</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Python-Webex-Bot</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Cards</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="cards">Cards</h1>
+<h2 id="create-send-blank-card">Create &amp; Send Blank Card</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Cards are meant to increase interactivity during the chat. They can be used, for example to send a form that the bot would like an end user to respond to. In this instance, we are sending a blank card to the user, which is pretty much useless. This can </p>
+<pre><code>from python.webex.v1.Card import Card
+from python.webex.v1.Bot import Bot
+
+bot = Bot()
+
+card = Card()
+
+bot.send_card(card=card, room_id=&quot;room-id&quot;)
+</code></pre>
+<h2 id="add-text-items-on-the-card">Add text items on the card</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>The card we just sent above is pretty much useless. If we are to send a card, the user needs to be able to interact with the card and the bot should be able to read whatever has been input on the user side.</p>
+<pre><code>from python_webex.v1.Card import Card
+from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+bot.create_webhook(
+    name='attachment-response-2', target_url=&quot;[your-bot-url]/attachment-response&quot;, resource=&quot;attachmentActions&quot;, event=&quot;created&quot;
+)
+
+Card = Card()
+bot.send_card(card=card, room_id='room-id')
+</code></pre>
+<h2 id="create-card-webhook">Create Card Webhook</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Here, we create a webhook for the card responses. For instance, if one fills a form that has been sent on a card, the response will be sent to the specific webhook. </p>
+<pre><code>from python_webex.v1.Card import Card
+from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+bot.create_webhook(
+    name='attachment-response-2', target_url=&quot;[your-bot-url]/attachment-response&quot;, resource=&quot;attachmentActions&quot;, event=&quot;created&quot;
+)
+
+</code></pre>
+<p><span style="color: red;"><b>Note:</b> always make sure to setup this webhook to be whatever link you will be using and append <i>/attachment-response</i> to it. For example, if you are using 'https://abc.com', your value on target_url will be 'https://abc.com/attachment-response'</span></p>
+<h2 id="listen-for-response-on-card">Listen for response on card</h2>
+<p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
+<p>Now, what happens when the user has filled a card form and the response has been sent to the webhook, how do we get the information about the card that has been filled from our end?</p>
+<p>Here is how: </p>
+<pre><code>from python_webex.v1.Card import Card
+from python_webex.v1.Bot imporrt Bot
+from pprint import pprint
+from python_webex import webhook
+
+bot = Bot()
+card = Card()
+
+
+card.add_input_text(
+    input_id=&quot;first-name-input&quot;, input_placeholder=&quot;First Name&quot;
+)
+
+card.add_input_text(
+    input_id=&quot;last-name-input&quot;, input_placeholder=&quot;Last Name&quot;
+)
+
+card.add_submit_action_btn(
+    title=&quot;Submit&quot;
+)
+
+message = bot.send_card(card=card, room_id=&quot;room-id&quot;)
+message_id = message.json()['id']
+
+@bot.attachment_response(message_id=message_id)
+def respond_to_card(msg):
+    pprint(msg)
+
+webhook.bot = bot
+
+if __name__ == &quot;__main__&quot;:
+    webhook.app.run(debug=True)
+
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../messages/" class="btn btn-neutral float-left" title="Messages"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../messages/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
