@@ -10,7 +10,7 @@ class Message:
     sending messages, listing your messages etc.  
     """
     
-    def send_message(self, to_person_email=None, room_id=None, text=None, files=[]):
+    def send_message(self, to_person_email=None, room_id=None, text=None, markdown=None, files: list=[]):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
@@ -29,8 +29,6 @@ class Message:
         if text == None:
             sys.exit("'text' is a required field")
 
-        if type(files) != list:
-            sys.exit("'files' needs to be a list")
 
         url_route = "messages"
 
@@ -44,6 +42,9 @@ class Message:
         elif to_person_email is not None:
             data["toPersonEmail"] = to_person_email
         
+        if markdown != None:
+            data["markdown"] = markdown
+
         if len(files) > 0:
             data["files"] = files
         
