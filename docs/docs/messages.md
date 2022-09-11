@@ -34,6 +34,30 @@ bot.send_message(room_id='room-id', text='I am sending a file', files=['https://
 
 <span style="color:red;"><b>Note</b> the <i>files</i> parameter may be a list, but only one field is allowed. Why Exactly? No Idea, ask Webex. And also you can only keep URI's on the files field and not a path to a file in a local directory. <span>
 
+
+## Send message with  Markdown
+<span style="color: orange">*Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.*</span>
+
+When we want to style our messages e.g using bold, italivs and so on, we can use markups. Have a look <a href="https://www.markdownguide.org/">here</a> to read more about how markups work. 
+
+So, this is how we can send a markup:
+
+```python
+from python_webex.v1.Bot import Bot
+
+bot = Bot()
+
+markdown = """
+*This is italic*\n
+**This is bold**\n
+`This looks like code`
+"""
+bot.send_message(
+    to_person_email="some-email@gmail.com", markdown = markdown
+)
+```
+
+
 ## Get messages
 
 <span style="color: orange;">*Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.*</span>
