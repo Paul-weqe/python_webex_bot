@@ -24,7 +24,7 @@ bot.send_message(room_id='someroomid', text='This is the text')
 <span style="color: orange;">*Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.*</span>
 
 To attach a files when sending a message, do this:
-```
+```python
 from python_webex.v1.Bot import Bot
 
 bot = Bot()
@@ -52,7 +52,7 @@ markdown = """
 **This is bold**\n
 `This looks like code`
 """
-bot.send_message(
+bot.send_markdown(
     to_person_email="some-email@gmail.com", markdown = markdown
 )
 ```
@@ -66,7 +66,7 @@ This lists all the messages that have been received by the bot on a specific roo
 
 This is how we can get these details:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from pprint import pprint
 
@@ -83,7 +83,7 @@ Gets a list of all messages sent in 1:1 rooms. This is basically a list of all t
 
 This is how this is done:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from pprint import pprint
 
@@ -99,7 +99,7 @@ pprint(bot.get_direct_messages(person_id="person-id").json())
 
 Gives you details about a specific message with ID <b><i>message-id</i></b>
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from pprint import pprint
 
@@ -114,7 +114,7 @@ pprin(bot.get_message_details(message_id="message-id").json())
 
 Deletes a specific message with ID <b><i>message-id</i></b>
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from pprint import pprint
 
@@ -140,7 +140,8 @@ Forwarding                    https://cff51342.ngrok.io -> http://localhost:5000
 ```
 
 Now, you can open up your text editor and type in the following:
-```
+
+```python
 from python_webex.v1.Bot import Bot
 from python_webex import webhook
 
@@ -164,7 +165,7 @@ on this tutorial.*</span>
 
 When you receive a message, it normally comes with text. The following is how to set a default response whatever text is sent to the bot:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 
 bot = Bot()
@@ -183,7 +184,7 @@ You want your bot to receive files? So do many other people.
 
 We need to have a way to handle how these files are received and handled. So here is how we set the default function for handling incoming files:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from python_webex import webhook
 
@@ -209,7 +210,7 @@ on this tutorial.*</span>
 
 What do you do when someone send you a file attached with a specific set of text, and you do know what you need your bot to do at this point:
 
-```
+```python
 from python_webex.v1.Bot import Bot
 from python_webex import webhook
 

@@ -118,7 +118,7 @@ bot.create_webhook(
 
 # we create a function that responds when someone says hi
 # the room_id will automatically be filled with the webhook. Do not forget it
-@bot.on_hears("hi)
+@bot.on_hears("hi")
 def greet_back(room_id=None):
     return bot.send_message(room_id=room_id, text="Hi, how are you doing?")
 

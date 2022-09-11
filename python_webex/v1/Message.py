@@ -10,7 +10,15 @@ class Message:
     sending messages, listing your messages etc.  
     """
     
-    def send_message(self, to_person_email=None, room_id=None, text=None, markdown=None, files: list=[]):
+    def send_message(
+        self, 
+        to_person_email:str = None, 
+        room_id:str = None, 
+        text:str = None, 
+        markdown:str = None, 
+        files: list=[], # we attach normal files (images, PDFs etc...)
+        attachments: list=[] # This is mainly used for cards that will be sent as part of the messages
+    ):
         """
         Allows for one to send a message to a room
         details on the rooms URL parameters can be found in https://developer.webex.com/docs/api/v1/messages/create-a-message
@@ -26,8 +34,8 @@ class Message:
         if room_id == None and to_person_email == None:
             sys.exit("either 'room_id', 'person_email' or 'toPersonId' must be present")
         
-        if text == None:
-            sys.exit("'text' is a required field")
+        if text == None and markdown == None:
+            sys.exit("'text' or 'markdown' must be present")
 
 
         url_route = "messages"
@@ -48,59 +56,63 @@ class Message:
         if len(files) > 0:
             data["files"] = files
         
+        if len(attachments) > 0:
+            data["attachments"] = attachments
+        
         data = requests.post( self.URL + url_route, headers=self.headers, json=data )
         return data
+    
+
 
     """
     Message requests uses URL https://api.ciscospark.com/v1/messages
 
     Enables sending of markdown data such as lists, links, code formatted messages etc
     """
-    def send_markdown(self, room_id=None, markdown=None):
+    def send_markdown(self, to_person_email:str = None, room_id:str = None, markdown:str = None):
         """
         ----
         Arguments
-
+        @ to_person_email => Email of the person we are sending the marked down message to
         @ room_id: str => ID of the room where the markdown is being sent to 
         @ text: str => text to be sent to the user. This will be shown without a markdown in case 
             the client device does not support rich text
 
         @ markdown: str => string with markdown information. For formatting information, we should 
             use https://dev-preview.webex.com/formatting-messages.html
-        
         """
-        if room_id == None:
-            sys.exit("'room_id' is a requierd field")
+        if room_id == None and to_person_email == None:
+            sys.exit("'room_id' or 'to_person_email' must be present")
         
         if markdown == None:
             sys.exit("'markdown' is a required field")
         
-        url_route = "messages"
-
-        data = {
-            "roomId": room_id,
-            "markdown": markdown
-        }
-                
-        data = requests.post( self.URL + url_route, headers = self.headers, json=data )
-        return data
+        return self.send_message(to_person_email=to_person_email, markdown=markdown, room_id=room_id)
     
-    def send_card(self, card:Card,  room_id:str, markdown: str="[This is the default markdown title]"):
+
+
+    def send_card(
+        self, 
+        card: Card,  
+        room_id: str = None, 
+        to_person_email: str = None, 
+        markdown: str="[This is the default markdown title]"
+    ):
         """
 		Cars are elements that can hold forms and improve interactivity of the messages. 
         For example, if you are using a bot to monitor your networking devices, this will require you to login the networking devices first. 
         You can send a form for one to login to the networking devices. 
         """
         
-        message = {
-            "roomId": room_id,
-            "markdown": markdown,
-            "attachments": card.content
-        }
-        
-        url_route = "messages"
-        data = requests.post(self.URL + url_route, headers=self.headers, json=message)
+        data = self.send_message(
+            to_person_email = to_person_email,
+            attachments = card.content,
+            room_id = room_id,
+            markdown = markdown
+        )
+
         return data
+    
     
     def get_attachment_response(self, attachment_id: str):
         """

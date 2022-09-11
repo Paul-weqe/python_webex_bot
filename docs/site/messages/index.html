@@ -116,7 +116,7 @@ bot.send_message(room_id='someroomid', text='This is the text')
 <h2 id="attach-files-with-message">Attach files with message</h2>
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
 <p>To attach a files when sending a message, do this:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 
 bot = Bot()
 
@@ -136,7 +136,7 @@ markdown = &quot;&quot;&quot;
 **This is bold**\n
 `This looks like code`
 &quot;&quot;&quot;
-bot.send_message(
+bot.send_markdown(
     to_person_email=&quot;some-email@gmail.com&quot;, markdown = markdown
 )
 </code></pre>
@@ -144,7 +144,7 @@ bot.send_message(
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
 <p>This lists all the messages that have been received by the bot on a specific room.</p>
 <p>This is how we can get these details:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from pprint import pprint
 
 bot = Bot()
@@ -155,7 +155,7 @@ pprint(bot.get_messages(room_id=&quot;room-id&quot;).json())
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
 <p>Gets a list of all messages sent in 1:1 rooms. This is basically a list of all the bot's DMs with a particular individual, done by providing the person's ID.</p>
 <p>This is how this is done:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from pprint import pprint
 
 bot = Bot()
@@ -165,7 +165,7 @@ pprint(bot.get_direct_messages(person_id=&quot;person-id&quot;).json())
 <h2 id="get-message-details">Get Message Details</h2>
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
 <p>Gives you details about a specific message with ID <b><i>message-id</i></b></p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from pprint import pprint
 
 bot = Bot()
@@ -175,7 +175,7 @@ pprin(bot.get_message_details(message_id=&quot;message-id&quot;).json())
 <h2 id="delete-message">Delete Message</h2>
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples on this tutorial.</em></span></p>
 <p>Deletes a specific message with ID <b><i>message-id</i></b></p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from pprint import pprint
 
 bot = Bot()
@@ -194,7 +194,7 @@ Forwarding                    http://cff51342.ngrok.io -&gt; http://localhost:50
 Forwarding                    https://cff51342.ngrok.io -&gt; http://localhost:5000
 </code></pre>
 <p>Now, you can open up your text editor and type in the following:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from python_webex import webhook
 
 bot = Bot()
@@ -212,7 +212,7 @@ if __name__ == &quot;__main__&quot;:
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples 
 on this tutorial.</em></span></p>
 <p>When you receive a message, it normally comes with text. The following is how to set a default response whatever text is sent to the bot:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 
 bot = Bot()
 
@@ -225,7 +225,7 @@ def default_on_hears_function(room_id=None):
 on this tutorial.</em></span></p>
 <p>You want your bot to receive files? So do many other people. </p>
 <p>We need to have a way to handle how these files are received and handled. So here is how we set the default function for handling incoming files:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from python_webex import webhook
 
 bot = Bot()
@@ -245,7 +245,7 @@ if __name__ == &quot;__main__&quot;:
 <p><span style="color: orange;"><em>Always remember that you need to have already set the value <b>auth_token</b> as your bot's Access token before you run this any of the other examples 
 on this tutorial.</em></span></p>
 <p>What do you do when someone send you a file attached with a specific set of text, and you do know what you need your bot to do at this point:</p>
-<pre><code>from python_webex.v1.Bot import Bot
+<pre><code class="language-python">from python_webex.v1.Bot import Bot
 from python_webex import webhook
 
 bot = Bot()
