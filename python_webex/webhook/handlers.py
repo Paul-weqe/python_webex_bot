@@ -16,6 +16,7 @@ Todo:
     *
 """
 from python_webex.v1.Bot import Bot
+import json
 
 
 class MessageReceivingHandler:
@@ -39,7 +40,12 @@ class MessageReceivingHandler:
         # handles when a normal message is sent with text in the message
         # but a way to handle the text received has not been defined by the bot programmer
         elif self.message_info["text"].strip() != "" and  self.message_info[ "text" ] not in self.bot.hears_to_function:
-            self.handle_messages_without_file_and_without_text()
+
+            # make sure the bot is not hearing its own messages
+            sender_email = self.message_info["personEmail"]
+            bot_emails = json.loads(self.bot.get_own_details().text)["emails"]
+            if sender_email not in bot_emails:
+                self.handle_messages_without_file_and_without_text()
             return None
     
 
