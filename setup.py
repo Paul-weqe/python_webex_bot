@@ -10,7 +10,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_webex_bot",
-    version="0.900",
+    version="0.901",
 
     scripts=["python_webex_bot"],
     author="Paul-weqe",
