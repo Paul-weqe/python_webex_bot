@@ -14,7 +14,6 @@ setuptools.setup(
 
     scripts=["python_webex_bot"],
     author="Paul-weqe",
-    author_email="paul1tw1@gmail.com",
     description="Enable sending markdown in messges",
     long_description=long_description,
     long_description_content_type="text/markdown",
