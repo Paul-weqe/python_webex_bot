@@ -5,7 +5,7 @@ chardet==3.0.4
 charset-normalizer==2.1.1
 click==7.1.2
 commonmark==0.9.1
-cryptography==38.0.1
+cryptography==38.0.3
 docutils==0.19
 Flask==1.1.2
 ghp-import==2.1.0
