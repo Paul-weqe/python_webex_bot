@@ -14,3 +14,4 @@ test_script.py
 *.pyc
 upgrade_version.sh
 .env
+test_script.sh
