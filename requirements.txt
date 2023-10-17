@@ -37,7 +37,7 @@ rich==12.5.1
 SecretStorage==3.3.3
 six==1.16.0
 twine==4.0.1
-urllib3==1.26.12
+urllib3==1.26.17
 virtualenv==16.4.3
 watchdog==2.1.9
 webencodings==0.5.1
