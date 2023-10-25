@@ -41,5 +41,5 @@ urllib3==1.26.17
 virtualenv==16.4.3
 watchdog==2.1.9
 webencodings==0.5.1
-Werkzeug==2.2.3
+Werkzeug==3.0.1
 zipp==3.8.1
