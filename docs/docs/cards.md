@@ -7,7 +7,7 @@
 Cards are meant to increase interactivity during the chat. They can be used, for example to send a form that the bot would like an end user to respond to. In this instance, we are sending a blank card to the user, which is pretty much useless. This can 
 
 
-```
+```python
 from python.webex.v1.Card import Card
 from python.webex.v1.Bot import Bot
 
@@ -24,7 +24,7 @@ bot.send_card(card=card, room_id="room-id")
 
 The card we just sent above is pretty much useless. If we are to send a card, the user needs to be able to interact with the card and the bot should be able to read whatever has been input on the user side.
 
-```
+```python
 from python_webex.v1.Card import Card
 from python_webex.v1.Bot import Bot
 
@@ -44,7 +44,7 @@ bot.send_card(card=card, room_id='room-id')
 
 Here, we create a webhook for the card responses. For instance, if one fills a form that has been sent on a card, the response will be sent to the specific webhook. 
 
-```
+```python
 from python_webex.v1.Card import Card
 from python_webex.v1.Bot import Bot
 
@@ -66,7 +66,7 @@ Now, what happens when the user has filled a card form and the response has been
 
 Here is how: 
 
-```
+```python
 from python_webex.v1.Card import Card
 from python_webex.v1.Bot imporrt Bot
 from pprint import pprint
